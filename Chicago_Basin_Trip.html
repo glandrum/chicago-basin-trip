@@ -1,0 +1,875 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#1E2A2F">
+<title>Chicago Basin by steam train — Windom &amp; Sunlight on one day of PTO</title>
+<meta name="description" content="A Dallas-to-Durango long weekend: the Durango & Silverton narrow gauge to Needleton, a night at 11,000 feet, and two 14ers before the Sunday train.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://commons.wikimedia.org">
+<link rel="preconnect" href="https://upload.wikimedia.org">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Barlow:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+  /* ------------------------------------------------------------
+     Tokens. Styled like a USGS 7.5' quad: pale map paper, brown
+     contour ink, blue water, and one thread of depot yellow for
+     everything that belongs to the train. Mobile is the base
+     layout; wider screens add columns.
+     ------------------------------------------------------------ */
+  :root{
+    --paper:#EEF0EA; --paper-2:#E3E7DF; --white:#FBFBF9;
+    --ink:#1E2A2F; --ink-2:#4A575E; --ink-3:#7C878D;
+    --contour:#A5673F; --contour-2:#D9B79A;
+    --water:#2F6F8F; --forest:#5B7A4E;
+    --rail:#E3B23C; --rail-2:#8C6B1E;
+    --sans:"Barlow",system-ui,-apple-system,"Segoe UI",Helvetica,Arial,sans-serif;
+    --cond:"Barlow Condensed","Arial Narrow","Helvetica Neue",Arial,sans-serif;
+    --max:1140px; --gutter:clamp(16px,4vw,48px); --nav-h:52px; --tap:44px;
+    --safe-l:env(safe-area-inset-left,0px); --safe-r:env(safe-area-inset-right,0px);
+  }
+  *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+  html{scroll-behavior:smooth;text-size-adjust:100%;-webkit-text-size-adjust:100%}
+  @media (prefers-reduced-motion:reduce){ html{scroll-behavior:auto} *{transition:none!important;animation:none!important;scroll-behavior:auto!important} }
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+  @media (min-width:800px){ body{font-size:17px} }
+  body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;opacity:.35;
+    background-image:repeating-radial-gradient(ellipse 900px 520px at 18% 14%,transparent 0 46px,rgba(165,103,63,.09) 46px 47px),
+                     repeating-radial-gradient(ellipse 760px 480px at 82% 78%,transparent 0 52px,rgba(165,103,63,.08) 52px 53px)}
+  main,header,footer,nav,.profile{position:relative;z-index:1}
+  a{color:var(--water);text-decoration-thickness:1px;text-underline-offset:3px}
+  a:hover{color:var(--ink)}
+  :focus-visible{outline:3px solid var(--rail);outline-offset:3px;border-radius:2px}
+  img{display:block;max-width:100%}
+  h1,h2,h3,h4{font-family:var(--cond);line-height:1;margin:0;font-weight:600;letter-spacing:.005em;text-wrap:balance}
+  h2{font-size:clamp(32px,6vw,56px)}
+  h3{font-size:clamp(23px,3.2vw,32px)}
+  h4{font-size:20px}
+  p{margin:0 0 1em}
+  .wrap{max-width:var(--max);margin:0 auto;padding:0 calc(var(--gutter) + var(--safe-r)) 0 calc(var(--gutter) + var(--safe-l))}
+
+  /* ---------------- hero ---------------- */
+  .hero{position:relative;background:#1E2A2F;min-height:min(88svh,880px);display:grid;align-items:end;color:var(--white);isolation:isolate;overflow:hidden}
+  .hero>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:62% 55%;z-index:-2}
+  .hero::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(20,30,36,.18) 0%,rgba(20,30,36,.06) 30%,rgba(20,30,36,.74) 72%,rgba(20,30,36,.94) 100%)}
+  .hero .wrap{padding-bottom:clamp(22px,5vw,64px);padding-top:110px;width:100%}
+  .hero h1{font-size:clamp(46px,11vw,148px);font-weight:700;line-height:.9;letter-spacing:-.01em;max-width:11ch}
+  .hero h1 .thin{font-weight:500;display:block;font-size:.46em;letter-spacing:.01em;margin-bottom:.4em;color:var(--rail);line-height:1.05}
+  .hero .lede{font-size:clamp(16px,2vw,21px);max-width:52ch;margin:18px 0 24px;color:#e9ecea}
+  .strip{display:grid;grid-template-columns:1fr 1fr;border-top:2px solid var(--rail)}
+  .strip div{padding:10px 10px 10px 0;border-bottom:1px solid rgba(251,251,249,.22)}
+  .strip div:nth-child(odd){border-right:1px solid rgba(251,251,249,.22)}
+  .strip div:nth-child(even){padding-left:10px}
+  .strip div:last-child{grid-column:1/-1;border-right:0}
+  .strip .t{font-family:var(--cond);font-size:clamp(22px,5.5vw,34px);font-weight:600;line-height:1;color:var(--white)}
+  .strip .l{font-size:13px;color:#cfd6d3;margin-top:3px}
+  .hero .credit{position:absolute;right:10px;top:10px;font-size:11px;color:rgba(251,251,249,.65);z-index:2}
+  @media (min-width:760px){
+    .strip{grid-template-columns:repeat(5,1fr);border-bottom:1px solid rgba(251,251,249,.35)}
+    .strip div,.strip div:nth-child(even){padding:12px 14px 12px 0;border-bottom:0;border-right:1px solid rgba(251,251,249,.22)}
+    .strip div:last-child{grid-column:auto;border-right:0}
+  }
+
+  /* ---------------- nav ---------------- */
+  .nav{position:sticky;top:0;z-index:20;background:rgba(238,240,234,.94);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border-bottom:1px solid var(--contour-2)}
+  .nav .wrap{position:relative}
+  .nav ul{list-style:none;margin:0;padding:0;display:flex;gap:0;overflow-x:auto;scrollbar-width:none;height:var(--nav-h);align-items:stretch;-webkit-overflow-scrolling:touch;scroll-snap-type:x proximity}
+  .nav ul::-webkit-scrollbar{display:none}
+  .nav li{flex:0 0 auto;scroll-snap-align:start}
+  .nav a{display:flex;align-items:center;height:100%;min-height:var(--tap);padding:0 12px;font-family:var(--cond);font-size:17px;font-weight:600;color:var(--ink-2);text-decoration:none;border-bottom:3px solid transparent;white-space:nowrap}
+  .nav a:hover{color:var(--ink)}
+  .nav a.is-active{color:var(--ink);border-bottom-color:var(--rail)}
+  .nav .brand{padding-left:0;font-weight:700;color:var(--ink)}
+  .nav .brand small{font-weight:500;color:var(--contour);margin-left:8px;font-size:14px;display:none}
+  .nav .wrap::after{content:"";position:absolute;right:0;top:0;bottom:0;width:40px;background:linear-gradient(90deg,rgba(238,240,234,0),rgba(238,240,234,.95));pointer-events:none}
+  @media (min-width:800px){ .nav .brand{margin-right:auto} .nav .brand small{display:inline} .nav a{font-size:18px} .nav .wrap::after{display:none} }
+
+  /* ---------------- elevation profile ---------------- */
+  .profile{background:var(--paper-2);border-bottom:1px solid var(--contour-2)}
+  .profile .wrap{padding-top:8px;padding-bottom:6px}
+  .profile svg{width:100%;height:auto;display:block;overflow:visible}
+  .profile .caption{display:flex;justify-content:space-between;gap:12px;font-size:12.5px;color:var(--ink-2);margin-top:2px;flex-wrap:wrap}
+  .profile .caption b{font-family:var(--cond);font-size:17px;font-weight:600;color:var(--ink)}
+  .profile .caption > span:last-child{display:none}
+  @media (min-width:800px){ .profile{position:sticky;top:var(--nav-h);z-index:15} .profile .caption > span:last-child{display:inline} }
+  .p-line{fill:none;stroke:var(--contour);stroke-width:2;stroke-linejoin:round}
+  .p-fill{fill:url(#pf)}
+  .p-seg{fill:none;stroke:var(--rail);stroke-width:5;stroke-linecap:round;stroke-linejoin:round;opacity:0;transition:opacity .35s}
+  .p-seg.is-on{opacity:1}
+  .p-stn circle{fill:var(--paper);stroke:var(--contour);stroke-width:1.5;r:4.5}
+  .p-stn text{font-family:var(--cond);font-size:11.5px;fill:var(--ink-2);font-weight:600}
+  .p-stn.is-on circle{fill:var(--rail);stroke:var(--rail-2)}
+  .p-stn.is-on text{fill:var(--ink)}
+  .p-stn{cursor:pointer}
+  .p-mark{fill:var(--rail);stroke:var(--ink);stroke-width:1.5;r:6;transition:transform .5s cubic-bezier(.3,.7,.2,1)}
+  .p-grid{stroke:var(--contour-2);stroke-width:.75;stroke-dasharray:2 4}
+  .p-gl{font-family:var(--cond);font-size:10.5px;fill:var(--ink-3)}
+  @media (max-width:640px){ .p-stn text{font-size:12.5px} .p-stn text.opt{display:none} .p-stn circle{r:5} .p-mark{r:7} .p-gl{font-size:10px} }
+
+  /* ---------------- sections ---------------- */
+  section.day{padding:clamp(40px,7vw,96px) 0;border-bottom:1px solid var(--contour-2);scroll-margin-top:calc(var(--nav-h) + 8px)}
+  @media (min-width:800px){ section.day{scroll-margin-top:calc(var(--nav-h) + 214px)} }
+  .day-head{display:grid;grid-template-columns:1fr;gap:18px;align-items:end;margin-bottom:clamp(20px,3vw,40px)}
+  .kicker{font-family:var(--cond);font-size:19px;font-weight:600;color:var(--contour);margin-bottom:10px;display:flex;gap:8px 10px;align-items:baseline;flex-wrap:wrap}
+  .pto{font-size:13px;font-weight:600;color:var(--white);background:var(--forest);padding:3px 8px;border-radius:2px;letter-spacing:.02em}
+  .pto.none{background:var(--ink-3)} .pto.rail{background:var(--rail-2)}
+  .day-head p{font-size:clamp(17px,2vw,19px);color:var(--ink-2);margin:12px 0 0;max-width:52ch}
+  .stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0 14px;border-top:2px solid var(--ink);padding-top:10px}
+  .stats b{display:block;font-family:var(--cond);font-size:clamp(26px,7vw,34px);font-weight:600;line-height:1;white-space:nowrap}
+  .stats span{font-size:12.5px;color:var(--ink-2);display:block;margin-top:3px}
+  @media (min-width:800px){ .day-head{grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:clamp(20px,4vw,56px)} .stats{justify-content:start;grid-template-columns:repeat(3,auto);gap:0 22px} .stats span{font-size:13px} }
+
+  .cols{display:grid;grid-template-columns:1fr;gap:26px;align-items:start}
+  @media (min-width:800px){ .cols{grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:clamp(22px,4vw,56px)} }
+
+  /* timetable rows */
+  .tt{border-top:2px solid var(--ink);margin:0}
+  .tt div{display:grid;grid-template-columns:72px 1fr;gap:12px;padding:12px 0;border-bottom:1px solid var(--contour-2)}
+  .tt dt{font-family:var(--cond);font-size:20px;font-weight:600;color:var(--ink);line-height:1.1;padding-top:2px}
+  .tt dt small{display:block;font-size:12px;font-weight:500;color:var(--contour);font-family:var(--sans)}
+  .tt dd{margin:0} .tt dd b{font-weight:600}
+  .tt .rail dt{color:var(--rail-2)}
+  @media (min-width:800px){ .tt div{grid-template-columns:92px 1fr;gap:16px} .tt dt{font-size:22px} }
+
+  /* figures and reels */
+  figure{margin:0}
+  figure img{width:100%;aspect-ratio:4/3;object-fit:cover;background:var(--paper-2);border:1px solid var(--contour-2)}
+  figure.wide img{aspect-ratio:16/10}
+  @media (min-width:800px){ figure.wide img{aspect-ratio:21/9} }
+  figcaption{font-size:13px;color:var(--ink-2);margin-top:8px;line-height:1.4}
+  figcaption .cr{color:var(--ink-3)}
+  figure.noimg{display:none}
+  /* A reel is a snap-scrolling strip of photos on phones and a grid on wide screens. */
+  .reel{display:flex;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;scrollbar-width:none;margin:0 calc(-1 * var(--gutter));padding:0 var(--gutter) 6px;scroll-padding:0 var(--gutter)}
+  .reel::-webkit-scrollbar{display:none}
+  .reel figure{flex:0 0 82%;scroll-snap-align:start}
+  .reel figure img{aspect-ratio:4/3}
+  .reel-hint{font-size:12.5px;color:var(--ink-3);margin:6px 0 0}
+  @media (min-width:800px){
+    .reel{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;overflow:visible;margin:0;padding:0;scroll-snap-type:none}
+    .reel.two{grid-template-columns:1fr 1fr}
+    .reel figure{flex:none}
+    .reel-hint{display:none}
+  }
+  .mile{display:inline-block;font-family:var(--cond);font-weight:600;font-size:13px;color:var(--rail-2);border:1.5px solid var(--rail-2);padding:1px 6px;border-radius:2px;margin-right:6px;vertical-align:1px}
+
+  .note{border-left:4px solid var(--rail);background:rgba(227,178,60,.10);padding:14px 16px;margin:20px 0 0;font-size:15.5px}
+  .note.water{border-left-color:var(--water);background:rgba(47,111,143,.08)}
+  .note.forest{border-left-color:var(--forest);background:rgba(91,122,78,.10)}
+  .note h4{margin-bottom:6px} .note p:last-child{margin-bottom:0}
+  ul.plain{padding-left:18px;margin:0 0 1em} ul.plain li{margin-bottom:6px}
+  .sub{font-family:var(--cond);font-size:clamp(22px,4vw,28px);font-weight:600;margin:34px 0 12px;padding-bottom:8px;border-bottom:2px solid var(--ink)}
+
+  /* ---------------- route cards ---------------- */
+  .routes{display:grid;grid-template-columns:1fr;gap:14px;margin-top:22px}
+  @media (min-width:800px){ .routes{grid-template-columns:1fr 1fr;gap:18px} }
+  details.route{border:1px solid var(--contour-2);background:var(--white)}
+  details.route summary{list-style:none;cursor:pointer;padding:14px 16px;display:grid;grid-template-columns:1fr auto;gap:12px;align-items:center;min-height:var(--tap)}
+  details.route summary::-webkit-details-marker{display:none}
+  details.route summary h3{font-size:clamp(22px,5vw,26px)}
+  details.route summary .meta{font-size:13.5px;color:var(--ink-2);margin-top:4px}
+  details.route summary .chev{width:30px;height:30px;border:1.5px solid var(--ink);border-radius:50%;display:grid;place-items:center;font-family:var(--cond);font-size:22px;transition:transform .25s}
+  details.route[open] summary .chev{transform:rotate(45deg)}
+  details.route .body{padding:0 16px 16px;border-top:1px solid var(--contour-2)}
+  details.route .body ol{padding-left:20px;margin:14px 0} details.route .body li{margin-bottom:8px}
+  .grade{display:inline-block;font-family:var(--cond);font-weight:600;font-size:14px;padding:2px 8px;border:1.5px solid currentColor;border-radius:2px;margin-left:6px;vertical-align:middle}
+  .grade.c3{color:var(--contour)} .grade.c4{color:#9A3B2C}
+
+  /* ---------------- toggle ---------------- */
+  .toggle{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px;background:var(--white);border:1px solid var(--contour-2);padding:12px 14px;margin:24px 0 0}
+  .toggle label{font-family:var(--cond);font-size:19px;font-weight:600;cursor:pointer;display:flex;align-items:center;gap:12px;min-height:var(--tap)}
+  .switch{position:relative;width:50px;height:28px;background:var(--paper-2);border:1.5px solid var(--ink-3);border-radius:14px;flex:0 0 auto}
+  .switch::after{content:"";position:absolute;top:2px;left:2px;width:20px;height:20px;border-radius:50%;background:var(--ink-2);transition:transform .2s,background .2s}
+  .toggle input:checked + .switch{background:rgba(227,178,60,.35);border-color:var(--rail-2)}
+  .toggle input:checked + .switch::after{transform:translateX(22px);background:var(--rail-2)}
+  .toggle input{position:absolute;opacity:0;width:1px;height:1px}
+  .toggle .hint{font-size:14px;color:var(--ink-2);flex-basis:100%}
+  @media (min-width:800px){ .toggle .hint{flex-basis:auto;margin-left:auto} }
+  .eolus-only{display:none} body.with-eolus .eolus-only{display:block}
+  body.with-eolus .no-eolus{display:none}
+  .dn-eolus{display:none} body.with-eolus .dn-eolus{display:inline} body.with-eolus .dn-base{display:none}
+
+  /* ---------------- gear ---------------- */
+  .gear-head{display:flex;align-items:end;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:18px}
+  .gear-progress{flex:1;min-width:200px;max-width:360px}
+  .gear-progress .bar{height:8px;background:var(--paper-2);border:1px solid var(--contour-2);position:relative}
+  .gear-progress .bar i{position:absolute;inset:0;width:0;background:var(--forest);transition:width .25s}
+  .gear-progress span{font-size:13px;color:var(--ink-2);display:block;margin-top:6px}
+  .gear{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:14px}
+  .gear fieldset{border:1px solid var(--contour-2);background:var(--white);padding:12px 14px 6px;margin:0;min-width:0}
+  .gear legend{font-family:var(--cond);font-size:20px;font-weight:600;padding:0 6px}
+  .gear label{display:grid;grid-template-columns:22px 1fr;gap:10px;align-items:start;padding:9px 0;font-size:15px;cursor:pointer;border-bottom:1px dashed var(--contour-2);min-height:var(--tap)}
+  .gear label:last-child{border-bottom:0}
+  .gear input{width:20px;height:20px;margin:1px 0 0;accent-color:var(--forest)}
+  .gear label small{display:block;color:var(--ink-3);font-size:12.5px}
+  .gear input:checked + span{color:var(--ink-3);text-decoration:line-through;text-decoration-color:var(--forest)}
+  .reset{font:inherit;font-family:var(--cond);font-size:16px;font-weight:600;background:none;border:1.5px solid var(--ink);padding:10px 14px;cursor:pointer;color:var(--ink);min-height:var(--tap)}
+  .reset:hover{background:var(--ink);color:var(--paper)}
+
+  /* ---------------- misc ---------------- */
+  .three{display:grid;grid-template-columns:1fr;gap:22px}
+  @media (min-width:800px){ .three{grid-template-columns:repeat(3,1fr)} }
+  .three h3{margin-bottom:10px;padding-bottom:8px;border-bottom:2px solid var(--ink)}
+  .budget{border-top:2px solid var(--ink);margin:0}
+  .budget div{display:flex;justify-content:space-between;gap:14px;padding:9px 0;border-bottom:1px solid var(--contour-2)}
+  .budget dt{margin:0} .budget dd{margin:0;font-family:var(--cond);font-size:19px;font-weight:600;white-space:nowrap}
+  .budget div.total{border-bottom:2px solid var(--ink)} .budget div.total dt{font-weight:600}
+  footer{padding:40px 0 calc(48px + env(safe-area-inset-bottom,0px));font-size:14px;color:var(--ink-2)}
+  footer h4{margin-bottom:10px} footer ul{padding-left:18px;margin:0 0 18px} footer li{margin-bottom:4px}
+</style>
+</head>
+<body>
+
+<!-- ============================ HERO ============================ -->
+<header class="hero" id="top">
+  <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Above_the_Animas_(40897274470).jpg?width=1600"
+       srcset="https://commons.wikimedia.org/wiki/Special:FilePath/Above_the_Animas_(40897274470).jpg?width=900 900w, https://commons.wikimedia.org/wiki/Special:FilePath/Above_the_Animas_(40897274470).jpg?width=1600 1600w, https://commons.wikimedia.org/wiki/Special:FilePath/Above_the_Animas_(40897274470).jpg?width=2400 2400w"
+       sizes="100vw" alt="A Durango & Silverton steam train on the High Line ledge above the Animas River gorge" fetchpriority="high">
+  <span class="credit">Photo: Wikimedia Commons (CC BY)</span>
+  <div class="wrap">
+    <h1><span class="thin">Dallas to the Weminuche on one day of PTO</span>Chicago Basin by steam train</h1>
+    <p class="lede">Fly to Durango Thursday after work. Ride an 1882 narrow gauge into a roadless gorge Friday, get dropped at a wilderness flag stop, and sleep at 11,000 feet. Climb Windom and Sunlight Saturday. Flag the train home Sunday.</p>
+    <div class="strip" aria-label="Key times">
+      <div><div class="t">Thu 7:00p</div><div class="l">Depart DFW, Terminal E</div></div>
+      <div><div class="t">Fri 8:30a</div><div class="l">Train leaves Durango depot</div></div>
+      <div><div class="t">Fri 11:00a</div><div class="l">Off at Needleton, 8,200'</div></div>
+      <div><div class="t">Sat 8:00a</div><div class="l">Windom summit, 14,089'</div></div>
+      <div><div class="t">Mon 11:30a</div><div class="l">Land DFW, back at work</div></div>
+    </div>
+  </div>
+</header>
+
+<!-- ============================ NAV ============================ -->
+<nav class="nav" aria-label="Sections">
+  <div class="wrap">
+    <ul>
+      <li><a class="brand" href="#top">Chicago Basin <small>Windom · Sunlight</small></a></li>
+      <li><a href="#thu" data-spy="thu">Thu · Fly</a></li>
+      <li><a href="#fri" data-spy="fri">Fri · Train &amp; hike</a></li>
+      <li><a href="#sat" data-spy="sat">Sat · Summits</a></li>
+      <li class="eolus-only"><a href="#eolus-day" data-spy="eolus-day">Sun · Eolus</a></li>
+      <li><a href="#sun" data-spy="sun">Out · Train home</a></li>
+      <li><a href="#routes" data-spy="routes">Routes</a></li>
+      <li><a href="#gear" data-spy="gear">Gear</a></li>
+      <li><a href="#basin" data-spy="basin">Altitude &amp; weather</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- ============================ ELEVATION PROFILE ============================ -->
+<div class="profile" aria-label="Elevation profile of the trip">
+  <div class="wrap">
+    <svg viewBox="0 0 1000 150" role="img" aria-labelledby="profTitle">
+      <title id="profTitle">Elevation profile from Dallas at 430 feet to Windom Peak at 14,089 feet and back to Durango</title>
+      <defs><linearGradient id="pf" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#A5673F" stop-opacity=".22"/><stop offset="1" stop-color="#A5673F" stop-opacity=".02"/></linearGradient></defs>
+      <g id="pgrid"></g><path id="pfill" class="p-fill" d=""/><path id="pline" class="p-line" d=""/><g id="psegs"></g><g id="pstns"></g><circle id="pmark" class="p-mark" cx="0" cy="0"/>
+    </svg>
+    <div class="caption"><span><b id="capName">Dallas</b> <span id="capElev">430'</span></span><span>Scroll the itinerary and the marker rides along the profile. Click a station to jump.</span></div>
+  </div>
+</div>
+
+<main>
+
+<!-- ============================ THURSDAY ============================ -->
+<section class="day" id="thu" data-station="dro">
+  <div class="wrap">
+    <div class="day-head">
+      <div>
+        <div class="kicker">Thursday evening <span class="pto none">No PTO</span></div>
+        <h2>Leave work, land in the mountains</h2>
+        <p>The whole trip hangs on one fact: you cannot fly in and catch the train the same morning. The earliest DFW nonstop lands at 9:46 a.m.; the Needleton trains have already left. So the flight goes Thursday night, and you sleep at 6,500 feet before jumping to 11,000.</p>
+      </div>
+      <div class="stats">
+        <div><b>2h 10m</b><span>DFW → DRO nonstop</span></div>
+        <div><b>6,512'</b><span>Durango overnight</span></div>
+        <div><b>0</b><span>vacation days used</span></div>
+      </div>
+    </div>
+
+    <figure class="wide">
+      <img loading="lazy" src="https://commons.wikimedia.org/wiki/Special:FilePath/Historic_Main_in_Downtown_Durango.JPG?width=1600" sizes="(min-width:1140px) 1140px, 100vw" alt="Main Avenue in downtown Durango, brick storefronts under a mountain sky">
+      <figcaption>Main Avenue, Durango. The depot is at the south end of this street and the hotels are along it; everything you need Thursday night is within a ten-minute walk. <span class="cr">Photo: Wikimedia Commons</span></figcaption>
+    </figure>
+
+    <div class="cols" style="margin-top:28px">
+      <div>
+        <dl class="tt">
+          <div><dt>5:00p</dt><dd>Out of the office. Bag is already packed except the fuel canister. Poles, stove, and everything sharp go in the checked pack.</dd></div>
+          <div><dt>7:00p<small>±</small></dt><dd>American nonstop from Terminal E, a CRJ. Take the earliest evening departure your calendar allows; the 9:00 p.m. is the last one, and a cancelled last flight means a missed, non-refundable, sold-out train.</dd></div>
+          <div><dt>8:30p</dt><dd>Land DRO, 15 minutes from downtown. Rental car or shuttle. If the Walmart on US-160 is open, buy the isobutane canister tonight.</dd></div>
+          <div><dt>9:15p</dt><dd>Hotel on or near Main Ave so you can walk to the depot in the morning. Confirm late check-in when you book.</dd></div>
+          <div><dt>10:00p</dt><dd>A liter of water, a big glass more, then sleep. This is the acclimatization night.</dd></div>
+        </dl>
+        <div class="note water">
+          <h4>Why the evening flight is the whole plan</h4>
+          <p>36 weekly nonstops run DFW–DRO from 8:20 a.m. to 9:00 p.m. None of the morning ones beat the train. A Thursday-night arrival costs no PTO, gives you a real bed at altitude, and puts you at depot check-in rested. Trip insurance that covers the train fare is cheap relative to what a weather-cancelled regional jet would cost you.</p>
+        </div>
+      </div>
+      <div>
+        <div class="reel two">
+          <figure>
+            <img loading="lazy" src="https://commons.wikimedia.org/wiki/Special:FilePath/Strater_Hotel_-_Durango,_CO.jpg?width=1000" alt="The red-brick Victorian Strater Hotel on Main Avenue in Durango">
+            <figcaption>The Strater, 1887, two blocks from the depot. Louis L'Amour wrote westerns in room 222 above the saloon piano. The General Palmer next door is the quieter pick. <span class="cr">Photo: Wikimedia Commons</span></figcaption>
+          </figure>
+          <figure>
+            <img loading="lazy" src="https://commons.wikimedia.org/wiki/Special:FilePath/Animas_River_just_north_of_downtown_Durango,_CO.jpg?width=1000" alt="The Animas River flowing past cottonwoods just north of downtown Durango">
+            <figcaption>The Animas a few blocks from Main Ave. Tomorrow you follow this river 30 miles upstream. <span class="cr">Photo: Wikimedia Commons</span></figcaption>
+          </figure>
+        </div>
+        <p class="reel-hint">Swipe for more</p>
+        <div class="note">
+          <h4>Fuel, the one thing that can't fly</h4>
+          <p>Isobutane canisters are banned on aircraft. Backcountry Experience and Pine Needle Mountaineering open around 8 a.m., which is tight against an 8:30 train. Walmart the night before, or a pickup order placed from Dallas, removes the risk.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ FRIDAY ============================ -->
+<section class="day" id="fri" data-station="camp">
+  <div class="wrap">
+    <div class="day-head">
+      <div>
+        <div class="kicker">Friday <span class="pto">1 day PTO</span> <span class="pto rail">Train day</span></div>
+        <h2>Two and a half hours of steam, six miles of trail</h2>
+        <p>Between Rockwood and Silverton there is no road at all. The train is the only way into the Animas Gorge, and Needleton is a wood platform where it stops just long enough to hand you your pack.</p>
+      </div>
+      <div class="stats">
+        <div><b>30 mi</b><span>by rail to Needleton</span></div>
+        <div><b>6 mi</b><span>Needle Creek Trail</span></div>
+        <div><b>+2,900'</b><span>to camp at ~11,000'</span></div>
+      </div>
+    </div>
+
+    <h3 class="sub">The ride, mile by mile</h3>
+    <div class="reel">
+      <figure>
+        <img loading="lazy" src="https://commons.wikimedia.org/wiki/Special:FilePath/K-37_-493_in_Durango,_Colorado.jpg?width=1000" alt="A black narrow-gauge steam locomotive in the Durango yard">
+        <figcaption><span class="mile">Mile 0</span>Durango yard, 7:30 a.m. Pack into the baggage car, then find the open gondola. <span class="cr">Photo: Wikimedia Commons</span></figcaption>
+      </figure>
+      <figure>
+        <img loading="lazy" src="https://commons.wikimedia.org/wiki/Special:FilePath/Steaming_beside_the_Animas_River_(48721221381).jpg?width=1000" alt="The steam train running beside the Animas River through the valley north of Durango">
+        <figcaption><span class="mile">Miles 1–17</span>The Animas Valley: ranch land, cottonwoods, red cliffs, the river alongside. The engine settles into 15 mph. <span class="cr">Photo: Wikimedia Commons (CC BY)</span></figcaption>
+      </figure>
+      <figure>
+        <img loading="lazy" src="https://commons.wikimedia.org/wiki/Special:FilePath/Coming_Around_the_Bend_-_Flickr_-_G._Lamar.jpg?width=1000" alt="The train rounding a curve in the Animas canyon with steep forested walls">
+        <figcaption><span class="mile">Mile 18</span>Rockwood. The last road. The track turns into the gorge and the grade steepens. <span class="cr">Photo: G. Lamar, Wikimedia Commons (CC BY)</span></figcaption>
+      </figure>
+      <figure>
+        <img loading="lazy" src="https://commons.wikimedia.org/wiki/Special:FilePath/Steam_on_the_Animas_-_September_2013.jpg?width=1000" alt="Steam train on a narrow ledge above the Animas River in the canyon">
+        <figcaption><span class="mile">Mile 19</span>The High Line. A shelf blasted into the granite 400 feet above the river, nothing between the gondola rail and the drop. Be on the right side of the car. <span class="cr">Photo: Wikimedia Commons</span></figcaption>
+      </figure>
+      <figure>
+        <img loading="lazy" src="https://commons.wikimedia.org/wiki/Special:FilePath/Coming_Around_the_Bend_(15114074572).jpg?width=1000" alt="The train following the river deep in the Animas canyon">
+        <figcaption><span class="mile">Miles 20–26</span>Deep in the gorge. The river is beside the track, then far below, then beside again. Tacoma power plant, Tank Creek, Cascade Creek. <span class="cr">Photo: Wikimedia Commons (CC BY)</span></figcaption>
+      </figure>
+      <figure>
+        <img loading="lazy" src="https://commons.wikimedia.org/wiki/Special:FilePath/K-28_-473_at_Cascade_Canyon_Wye.jpg?width=1000" alt="A K-28 locomotive on the wye at Cascade Canyon">
+        <figcaption><span class="mile">Mile 26</span>Cascade Canyon wye, where the winter trains turn around. The Needle Mountains start showing above the canyon rim. Needleton is 15 minutes on. <span class="cr">Photo: Wikimedia Commons (CC BY)</span></figcaption>
+      </figure>
+    </div>
+    <p class="reel-hint">Swipe through the ride</p>
+
+    <div class="cols" style="margin-top:30px">
+      <div>
+        <dl class="tt">
+          <div class="rail"><dt>7:30a</dt><dd>Depot at 479 Main Ave. Check the pack into the baggage car, pick up your boarding pass. You booked the <b>backpacker fare to Needleton</b>, not a Silverton ticket, and you booked it months ago.</dd></div>
+          <div class="rail"><dt>8:30a<small>±</small></dt><dd>Depart. Coal-fired K-36 up front, cinders in your hair, 20 mph. The High Line comes about 40 minutes in. Rockwood is the last road you'll see until Sunday.</dd></div>
+          <div class="rail"><dt>11:00a</dt><dd><b>Needleton, 8,200'.</b> Be at the door with your things; the stop is brief. Grab the pack from the baggage car, watch the train pull away, and it gets very quiet.</dd></div>
+          <div><dt>11:15a</dt><dd>Cross the Animas on the suspension bridge, turn right (south) along the river to the Needle Creek junction, ~0.8 mi. Stay left and enter the Weminuche.</dd></div>
+          <div><dt>Noon–3p</dt><dd>Needle Creek Trail. Well built, steady grade through aspen and then spruce, bridge over New York Creek at ~2 miles, three more miles to the basin. Water is everywhere; filter as you go instead of carrying it.</dd></div>
+          <div><dt>3:30p</dt><dd><b>Chicago Basin.</b> Sites between 10,800' and 11,100' on the benches near the upper end of the basin. 100 feet from water and trail. Respect the "no camping beyond this point" sign below Twin Lakes.</dd></div>
+          <div><dt>Evening</dt><dd>Tent up, filter water, eat, drink more than you want to. Study Windom and Sunlight from camp; you can see the whole of tomorrow from your tent door. Bed early.</dd></div>
+        </dl>
+        <div class="note forest">
+          <h4>First night at 11,000'</h4>
+          <p>From 430' in Dallas to 11,000' in under 24 hours is the biggest jump of the trip. A dull headache and a restless night are normal. Headache that keeps getting worse, vomiting, or breathlessness at rest are not: the trail down is right there, and the train runs daily.</p>
+        </div>
+      </div>
+      <div>
+        <h3 class="sub" style="margin-top:0">The walk in</h3>
+        <div class="reel two">
+          <figure>
+            <img loading="lazy" src="https://commons.wikimedia.org/wiki/Special:FilePath/Canyon_of_the_Rio_las_Animas,_Colorado_LCCN2017658707.jpg?width=1000" alt="Historic photograph of the Animas canyon with the river far below the rail line">
+            <figcaption>Needleton is a platform, a footbridge, and the sound of the train leaving. This is the same gorge W.H. Jackson photographed for the railroad in the 1880s. <span class="cr">Photo: Library of Congress via Wikimedia Commons (public domain)</span></figcaption>
+          </figure>
+          <figure>
+            <img loading="lazy" src="https://commons.wikimedia.org/wiki/Special:FilePath/Continental_divide_trail_in_Weminuche_Wilderness.jpg?width=1000" alt="A trail through open high country in the Weminuche Wilderness">
+            <figcaption>Weminuche high country. Needle Creek climbs through aspen, then spruce, then opens up like this at the mouth of the basin around mile 5. <span class="cr">Photo: Wikimedia Commons</span></figcaption>
+          </figure>
+          <figure>
+            <img loading="lazy" src="https://commons.wikimedia.org/wiki/Special:FilePath/Windom_Peak_and_Unnamed_above_Chicago_Basin.jpg?width=1000" alt="Windom Peak and a neighboring unnamed summit rising above the green floor of Chicago Basin">
+            <figcaption>The reward at mile 6: Windom Peak above Chicago Basin. Camp is in the meadows and benches at the bottom of this view. <span class="cr">Photo: Wikimedia Commons (CC BY)</span></figcaption>
+          </figure>
+          <figure>
+            <img loading="lazy" src="https://commons.wikimedia.org/wiki/Special:FilePath/Alpenglow_on_the_Eolus_Peaks.jpg?width=1000" alt="Alpenglow lighting the summits of Mount Eolus and North Eolus above the basin">
+            <figcaption>Evening from camp: alpenglow on Eolus and North Eolus, across the basin from tomorrow's peaks. <span class="cr">Photo: Wikimedia Commons (CC BY)</span></figcaption>
+          </figure>
+        </div>
+        <p class="reel-hint">Swipe for more</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ SATURDAY ============================ -->
+<section class="day" id="sat" data-station="sunlight">
+  <div class="wrap">
+    <div class="day-head">
+      <div>
+        <div class="kicker">Saturday <span class="pto none">Weekend</span></div>
+        <h2>Windom, then Sunlight, then back for lunch</h2>
+        <p>Both peaks are climbed from Twin Lakes at 12,500'. The trail is excellent to 13,000' and then turns into cairned scrambling with no continuous path. Storms build by noon; the target is both summits before 11 a.m.</p>
+      </div>
+      <div class="stats">
+        <div><b>~7 mi</b><span>camp to camp</span></div>
+        <div><b>+4,000'</b><span>total gain</span></div>
+        <div><b>Class 3</b><span>Class 4 block optional</span></div>
+      </div>
+    </div>
+
+    <div class="reel two">
+      <figure>
+        <img loading="lazy" src="https://commons.wikimedia.org/wiki/Special:FilePath/Sunlight_Peak.jpg?width=1000" alt="Sunlight Peak seen across an alpine lake">
+        <figcaption>Sunlight Peak from the Twin Lakes side. The South Face route climbs the gully system to the notch, then blocks to the summit. <span class="cr">Photo: Wikimedia Commons (public domain)</span></figcaption>
+      </figure>
+      <figure>
+        <img loading="lazy" src="https://commons.wikimedia.org/wiki/Special:FilePath/Sunlight_Peak_from_Windom_Peak.jpg?width=1000" alt="Sunlight Peak seen from the summit of Windom Peak with the connecting basin below">
+        <figcaption>Sunlight from the top of Windom. The crossover between them drops to ~13,300' and traverses Class 2 slabs, not the loose northwest face. <span class="cr">Photo: Wikimedia Commons (CC BY 2.0)</span></figcaption>
+      </figure>
+    </div>
+    <p class="reel-hint">Swipe for more</p>
+
+    <div class="cols" style="margin-top:30px">
+      <div>
+        <dl class="tt">
+          <div><dt>4:00a</dt><dd>Alarm. Water, food, summit pack: layers, shell, 2 L, snacks, headlamp, first aid, satellite messenger, sun protection.</dd></div>
+          <div><dt>5:00a</dt><dd>Moving by headlamp. Trail NE up the basin, left at the signed Twin Lakes junction at 11,200', switchbacks past two stream crossings.</dd></div>
+          <div><dt>6:20a</dt><dd><b>Twin Lakes, 12,500'.</b> Right around the first lake, switchback up, continue to the big cairn above 13,000'. Sunlight's cairns branch left here; go right for Windom.</dd></div>
+          <div><dt>7:15a</dt><dd>Angled slabs to ~13,300', turn right up to the Windom–Peak 18 saddle at 13,450'. West ridge from here: 650 feet, mostly on the left side of the crest, cairned.</dd></div>
+          <div><dt>8:00a</dt><dd><b>Windom Peak, 14,089'.</b> Highest point in La Plata County and the whole San Juan River drainage. Photos, ten minutes, then down.</dd></div>
+          <div><dt>8:45a</dt><dd>Back to the saddle. Drop north ~150' to flatter ground near 13,300', traverse NE across slabs, angle up to join the Sunlight South Face route at ~13,500'.</dd></div>
+          <div><dt>10:00a</dt><dd><b>Sunlight Peak, 14,059'.</b> The leaning summit block is an exposed Class 4 step and mantle with a serious drop behind it. Decide at camp, not on the block, whether you're touching it or standing on it.</dd></div>
+          <div><dt>10:30a</dt><dd>Down the gully, back past Twin Lakes. Clouds usually start stacking about now.</dd></div>
+          <div><dt>1:00p</dt><dd>Camp. Eat, filter, rehydrate, feet up. Pack everything you won't need in the morning so tomorrow starts fast.</dd></div>
+        </dl>
+      </div>
+      <div>
+        <div class="note">
+          <h4>Compared to the Keyhole on Longs</h4>
+          <p>Shorter and less sustained scrambling than the Ledges–Trough–Narrows–Homestretch sequence, but harder route-finding: cairns instead of painted bullseyes. The rock is quartzite-heavy and more broken than Longs' granite: better friction, more loose stuff. Test holds. Your X Ultra Mids are right; edge in cracks and avoid the polished streaks on any wet slab.</p>
+        </div>
+        <div class="note water">
+          <h4>Lightning is the hazard, not the rock</h4>
+          <p>Monsoon-season storms form fast over the Needles. Sunlight's summit block and Windom's ridge are the worst places to be when they do. Off the summits by 11 a.m. is the rule, and a 5 a.m. start is what makes it possible.</p>
+        </div>
+        <div class="note forest">
+          <h4>Rope? No.</h4>
+          <p>There is nothing to anchor to on these routes and two scramblers tied together with no anchor are worse off than unroped. If conditions make you want one, that is your turnaround signal.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ OPTIONAL EOLUS DAY ============================ -->
+<section class="day eolus-only" id="eolus-day" data-station="eolus">
+  <div class="wrap">
+    <div class="day-head">
+      <div>
+        <div class="kicker">Sunday, with the extra day <span class="pto">2nd day PTO</span></div>
+        <h2>Eolus and the Catwalk</h2>
+        <p>The third 14er sits across the basin on the west side of Twin Lakes. It needs its own summit day and a third night, which turns Sunday into a climb, Monday into the walk-out, and Tuesday morning into the flight home.</p>
+      </div>
+      <div class="stats">
+        <div><b>~5 mi</b><span>camp to camp</span></div>
+        <div><b>+3,000'</b><span>total gain</span></div>
+        <div><b>Class 3</b><span>exposed ridge crest</span></div>
+      </div>
+    </div>
+    <div class="cols">
+      <div>
+        <dl class="tt">
+          <div><dt>5:00a</dt><dd>Same start. Twin Lakes, then follow cairns northwest up a ramp system and slabs toward the Eolus–North Eolus saddle at ~13,850'. Easy to lose in fog; the cairns matter.</dd></div>
+          <div><dt>7:45a</dt><dd>North Eolus, 14,039', is a 10-minute Class 2+ scramble from the saddle. Not an official ranked 14er, worth it anyway.</dd></div>
+          <div><dt>8:00a</dt><dd><b>The Catwalk.</b> A ridge crest two to three feet wide for about a hundred yards, big drops both sides. Walking, technically, but not casual walking. Not a place for wind or ice.</dd></div>
+          <div><dt>8:45a</dt><dd><b>Mt. Eolus, 14,083'.</b> From the end of the Catwalk, cairned ledges and short Class 3 steps angle up and left. If it feels harder than Class 3, back up and find the cairn.</dd></div>
+          <div><dt>Noon</dt><dd>Back at camp. Monday: hike out for the afternoon train. Tuesday: first flight home.</dd></div>
+        </dl>
+      </div>
+      <div>
+        <figure>
+          <img loading="lazy" src="https://commons.wikimedia.org/wiki/Special:FilePath/The_ridge_from_N._Eolus_over_to_Eolus.jpg?width=1000" alt="The narrow rocky ridge connecting North Eolus to Mount Eolus">
+          <figcaption>The ridge from North Eolus toward Eolus. The Catwalk is the narrowest part of it. <span class="cr">Photo: Wikimedia Commons (CC BY)</span></figcaption>
+        </figure>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ SUNDAY OUT ============================ -->
+<section class="day" id="sun" data-station="dro2">
+  <div class="wrap">
+    <div class="day-head">
+      <div>
+        <div class="kicker"><span class="dn-base">Sunday</span><span class="dn-eolus">Monday</span> <span class="pto none">Weekend</span> <span class="pto rail">Train day</span></div>
+        <h2>Walk down, flag the train, hot shower</h2>
+        <p>Legs are tired from yesterday, so the descent takes longer than the numbers suggest. The only unforgiving thing on this trip is the afternoon train: miss it and you spend another night on the platform.</p>
+      </div>
+      <div class="stats">
+        <div><b>6 mi</b><span>down to Needleton</span></div>
+        <div><b>−2,900'</b><span>knees</span></div>
+        <div><b>~3:30p</b><span>southbound train</span></div>
+      </div>
+    </div>
+    <div class="cols">
+      <div>
+        <dl class="tt">
+          <div><dt>6:00a</dt><dd>Up, coffee, pack. Wipe down the tent; pee on rocks away from camp so the goats don't dig up the meadow after you leave.</dd></div>
+          <div><dt>8:00a</dt><dd>Leave camp. 2.5 to 3.5 hours down. Start early rather than late; there is nothing to gain from lingering.</dd></div>
+          <div><dt>11:30a</dt><dd>Needleton. Lunch on the platform, feet in the Animas, and stand where the engineer can see you. 30 minutes early minimum.</dd></div>
+          <div class="rail"><dt>3:30p<small>±</small></dt><dd><b>Flag the southbound.</b> It's the same train coming down from Silverton, so it's been running all day. Pack into the baggage car, find a seat, watch the gorge go by in the other direction.</dd></div>
+          <div class="rail"><dt>6:00p</dt><dd>Durango. Hotel, shower, the biggest steak on Main Ave.</dd></div>
+          <div><dt>Mon 8:20a</dt><dd>First nonstop to DFW lands around 11:30 a.m. Half day, or work from the airport.</dd></div>
+        </dl>
+        <div class="note">
+          <h4>Sunday night is not optional</h4>
+          <p>The return train reaches Durango around 6 p.m., after the last DRO departure. Book the hotel, take the 8:20 a.m. nonstop Monday, and you're clean, fed, and rested instead of sprinting through an airport in the clothes you hiked out in.</p>
+        </div>
+      </div>
+      <div>
+        <div class="reel two">
+          <figure>
+            <img loading="lazy" src="https://commons.wikimedia.org/wiki/Special:FilePath/Durango_and_Silverton_NGRR_May_2024-m1.jpg?width=1000" alt="The Durango & Silverton train in the Animas canyon, seen from trackside">
+            <figcaption>The southbound comes down the gorge mid-afternoon. Stand on the platform where the engineer can see you; it will not stop for someone still tying a boot. <span class="cr">Photo: Wikimedia Commons</span></figcaption>
+          </figure>
+          <figure>
+            <img loading="lazy" src="https://commons.wikimedia.org/wiki/Special:FilePath/Blue_Winter_Skies_Hug_the_Durango_Skyline.JPG?width=1000" alt="Downtown Durango's historic buildings under a blue sky">
+            <figcaption>Durango at 6 p.m. Shower, steak, and a bed. The first flight leaves at 8:20 the next morning. <span class="cr">Photo: Wikimedia Commons (CC BY-SA)</span></figcaption>
+          </figure>
+        </div>
+        <p class="reel-hint">Swipe for more</p>
+      </div>
+    </div>
+
+    <div class="toggle">
+      <label for="eolus"><input type="checkbox" id="eolus"><span class="switch" aria-hidden="true"></span> Add a third night and climb Eolus</label>
+      <span class="hint">Turns this into two PTO days: Sunday climb, Monday out, Tuesday flight.</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ ROUTES ============================ -->
+<section class="day" id="routes" data-station="windom">
+  <div class="wrap">
+    <div class="day-head">
+      <div>
+        <div class="kicker">Route details</div>
+        <h2>Above 13,000' there is no trail. Read this before the basin.</h2>
+        <p>Descriptions follow the 14ers.com standard routes. Download the app and the GPX tracks before you leave the hotel; there is no signal past Rockwood.</p>
+      </div>
+      <div class="stats">
+        <div><b>wind1</b><span>Windom West Ridge</span></div>
+        <div><b>sunl2</b><span>Sunlight South Face</span></div>
+        <div><b>chib1</b><span>Chicago Basin approach</span></div>
+      </div>
+    </div>
+
+    <div class="routes">
+      <details class="route" open>
+        <summary>
+          <div><h3>Windom Peak 14,089' <span class="grade c3">Easy Class 3</span></h3><div class="meta">West Ridge · 6 mi / 3,000' from camp · exposure, rockfall, route-finding and commitment all rated considerable</div></div>
+          <span class="chev" aria-hidden="true">+</span>
+        </summary>
+        <div class="body">
+          <ol>
+            <li>From Twin Lakes stay right around the first lake, switchback up, and continue to a prominent cairn above 13,000' in the center of the upper basin, then a second cairn just east. Sunlight's cairns branch left here.</li>
+            <li>For Windom, drop slightly and traverse the angled slabs right of the basin's center. This avoids the loose gully further right that people use as a shortcut and shouldn't.</li>
+            <li>Follow slabs east to ~13,300', turn right, and climb to the Windom–Peak 18 saddle at 13,450'.</li>
+            <li>West ridge: 650 feet, mostly on the left (north) side of the crest, following cairns to a small notch at 13,800'. Above the notch the blocks get bigger and the summit stays hidden.</li>
+            <li>Near 13,900' stay left of the ridge. Just below the top, two breaks in the ridge give easy Class 3 access to the final pitch. Scramble the summit blocks.</li>
+            <li><b>Do not descend the northwest face toward Sunlight</b> in summer. It's steep and loose. Return to the saddle and use the crossover.</li>
+          </ol>
+        </div>
+      </details>
+
+      <details class="route">
+        <summary>
+          <div><h3>Sunlight Peak 14,059' <span class="grade c3">Class 3</span><span class="grade c4">Class 4 block</span></h3><div class="meta">South Face via the crossover · adds ~1 mi / 1,000' to Windom · the summit block is the only Class 4 move on the trip</div></div>
+          <span class="chev" aria-hidden="true">+</span>
+        </summary>
+        <div class="body">
+          <ol>
+            <li>From the Windom–Peak 18 saddle drop north about 150' to flatter terrain near 13,300'. Traverse northeast across Class 2 slabs and angle up an easy slope to intersect the standard Sunlight route around 13,500'.</li>
+            <li>Follow cairns up the broad gully system to the notch, then a short series of Class 3 moves through boulders, including a well-known squeeze between blocks, to the summit area.</li>
+            <li>The true summit is a leaning block that takes an exposed Class 4 step-across and mantle onto a smooth top with a serious drop on the far side. Many people touch it rather than stand on it and count the block below as the summit.</li>
+            <li>Descend the way you came. Windom plus Sunlight via the crossover is about 7 miles and 4,000' from camp.</li>
+          </ol>
+        </div>
+      </details>
+
+      <details class="route eolus-only">
+        <summary>
+          <div><h3>Mt. Eolus 14,083' <span class="grade c3">Class 3</span></h3><div class="meta">Northeast Ridge via the Catwalk · 5 mi / 3,000' from camp · the most sustained exposure of the three</div></div>
+          <span class="chev" aria-hidden="true">+</span>
+        </summary>
+        <div class="body">
+          <ol>
+            <li>From Twin Lakes follow the trail and cairns northwest up a ramp system and slabs to the saddle between Eolus and North Eolus, ~13,850'.</li>
+            <li>The Catwalk: a two- to three-foot-wide crest, about a hundred yards, with big drops both sides. Class 2+/3 walking with real consequences. Skip it in wind or with any ice.</li>
+            <li>From the end of the Catwalk, ledges and short Class 3 steps angle up and left to the summit. Cairned but easy to drift onto harder ground.</li>
+            <li>North Eolus, 14,039', is a 10-minute Class 2+ scramble from the saddle.</li>
+          </ol>
+        </div>
+      </details>
+
+      <details class="route no-eolus">
+        <summary>
+          <div><h3>Mt. Eolus 14,083' <span class="grade c3">Not in this plan</span></h3><div class="meta">Needs its own summit day and a third night · use the switch above to add it</div></div>
+          <span class="chev" aria-hidden="true">+</span>
+        </summary>
+        <div class="body">
+          <p style="margin-top:14px">Eolus is climbed from the same Twin Lakes trail via the Eolus–North Eolus saddle and the Catwalk, a narrow Class 3 ridge with big drops on both sides, then cairned ledges up the east face. Attempting it as a third peak on the Windom/Sunlight day isn't realistic on one night of acclimatization from sea level. Leave it as the reason to come back.</p>
+        </div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ GEAR ============================ -->
+<section class="day" id="gear" data-station="camp">
+  <div class="wrap">
+    <div class="gear-head">
+      <div>
+        <div class="kicker">Gear</div>
+        <h2>One pack, two nights, 28 to 32 pounds</h2>
+        <p style="font-size:clamp(17px,2vw,19px);color:var(--ink-2);margin:12px 0 0;max-width:52ch">Everything rides the baggage car and then your back for six miles. Check things off as they go in; the list keeps itself while the page is open.</p>
+      </div>
+      <div class="gear-progress"><div class="bar"><i id="gearBar"></i></div><span id="gearCount">0 of 0 packed</span></div>
+    </div>
+    <div class="gear" id="gearList">
+      <fieldset><legend>Carry</legend>
+        <label><input type="checkbox"><span>55–65 L pack with rain cover or liner</span></label>
+        <label><input type="checkbox"><span>18–25 L summit pack <small>or a stuffable one</small></span></label>
+        <label><input type="checkbox"><span>Trekking poles <small>approach and descent; checked baggage</small></span></label>
+      </fieldset>
+      <fieldset><legend>Sleep</legend>
+        <label><input type="checkbox"><span>3-season tent, full fly, extra stakes <small>thin soil, nightly storms</small></span></label>
+        <label><input type="checkbox"><span>Bag rated 15–25°F</span></label>
+        <label><input type="checkbox"><span>Inflatable pad, R-value 3+</span></label>
+        <label><input type="checkbox"><span>Dry sleep layer and clean socks <small>does more than washing</small></span></label>
+      </fieldset>
+      <fieldset><legend>Wear</legend>
+        <label><input type="checkbox"><span>Salomon X Ultra Mid GTX <small>edge in cracks, avoid polished streaks</small></span></label>
+        <label><input type="checkbox"><span>Camp shoes or sandals</span></label>
+        <label><input type="checkbox"><span>Synthetic base layers, fleece or light puffy</span></label>
+        <label><input type="checkbox"><span>Hardshell jacket and pants <small>real rain gear, not a windbreaker</small></span></label>
+        <label><input type="checkbox"><span>Warm hat, sun hat, light gloves, 3 pairs wool socks</span></label>
+      </fieldset>
+      <fieldset><legend>Kitchen &amp; water</legend>
+        <label><input type="checkbox"><span>Canister stove, pot, spoon, lighter + backup</span></label>
+        <label><input type="checkbox"><span>1 × 8 oz isobutane <small>buy in Durango, can't fly</small></span></label>
+        <label><input type="checkbox"><span>Filter plus chemical backup, 3 L capacity <small>goats and marmots are upstream of everything</small></span></label>
+        <label><input type="checkbox"><span>2 dinners, 2 breakfasts, summit snacks, electrolytes <small>~1.5–2 lb per day</small></span></label>
+        <label><input type="checkbox"><span>Bear canister or hang kit <small>goats chew salty straps</small></span></label>
+      </fieldset>
+      <fieldset><legend>Navigate &amp; call</legend>
+        <label><input type="checkbox"><span>14ers.com app with routes offline, GPX files</span></label>
+        <label><input type="checkbox"><span>Trails Illustrated #140 and compass</span></label>
+        <label><input type="checkbox"><span>Satellite messenger <small>inReach, or iPhone satellite SOS enabled</small></span></label>
+        <label><input type="checkbox"><span>Headlamp + spare batteries, battery bank</span></label>
+        <label><input type="checkbox"><span>Train times written down; someone at home has them too</span></label>
+      </fieldset>
+      <fieldset><legend>Body</legend>
+        <label><input type="checkbox"><span>SPF 50, lip balm, sunglasses</span></label>
+        <label><input type="checkbox"><span>First aid and blister kit</span></label>
+        <label><input type="checkbox"><span>Unscented body wipes <small>this is the shower; pack them out</small></span></label>
+        <label><input type="checkbox"><span>Trowel, TP, WAG bags, hand sanitizer</span></label>
+        <label><input type="checkbox"><span>Emergency bivy and whistle</span></label>
+        <label><input type="checkbox"><span>Helmet <small>reasonable in the Sunlight gully; your call</small></span></label>
+      </fieldset>
+    </div>
+    <p style="margin-top:16px"><button class="reset" type="button" id="gearReset">Clear the list</button></p>
+  </div>
+</section>
+
+<!-- ============================ BASIN NOTES ============================ -->
+<section class="day" id="basin" data-station="camp">
+  <div class="wrap">
+    <div class="day-head">
+      <div>
+        <div class="kicker">Altitude, weather, goats, money</div>
+        <h2>The basin has rules of its own</h2>
+      </div>
+    </div>
+    <div class="three">
+      <div>
+        <h3>Altitude</h3>
+        <p>Dallas is 430'. Camp is 11,000' and the summits are over 14,000', and you climb on your second morning up there, which is the roughest timing for acclimatization there is. The Durango night helps. Water helps more than anything: drink from the moment you land, skip alcohol until Sunday night.</p>
+        <p>Some people ask their doctor about acetazolamide for trips like this. That's a conversation for you and your physician.</p>
+      </div>
+      <div>
+        <h3>Weather</h3>
+        <p>July and August are monsoon: clear mornings, storms by noon, often earlier. Early to mid-September is usually the best window, drier and quieter with cold nights, and the first snow can land any day. Check 14ers.com Peak Conditions the week before and the NOAA point forecast for 37.62, −107.59 before you board; there are no updates once you're on the train.</p>
+        <p>Rain the day before doesn't shut these routes down. Slabs dry within a couple of hours of sun. The Sunlight gully holds moisture longest.</p>
+      </div>
+      <div>
+        <h3>Mountain goats</h3>
+        <p>A resident herd, habituated to people, relentless about salt. They lick sweaty straps, chew pole grips, and dig up the ground where anyone has urinated. Pee on bare rock well away from camp, never leave gear outside the tent unattended, and don't feed or approach them. Marmots take the hip belts and boots you leave out at night.</p>
+      </div>
+    </div>
+
+    <div class="cols" style="margin-top:40px">
+      <div>
+        <h3 style="margin-bottom:14px">Budget, per person, flying</h3>
+        <dl class="budget">
+          <div><dt>DFW–DRO round trip, Thursday evening / Monday early</dt><dd>$350–650</dd></div>
+          <div><dt>Rental car, Thursday to Monday</dt><dd>$120–200</dd></div>
+          <div><dt>Durango hotel, Thursday and Sunday</dt><dd>$300–450</dd></div>
+          <div><dt>Train, backpacker fare to Needleton, round trip</dt><dd>$130–160</dd></div>
+          <div><dt>Fuel, food, incidentals</dt><dd>$100–150</dd></div>
+          <div class="total"><dt>Total</dt><dd>$1,000–1,600</dd></div>
+        </dl>
+      </div>
+      <div>
+        <h3 style="margin-bottom:14px">Book, in this order</h3>
+        <ul class="plain">
+          <li><a href="https://www.durangotrain.com" target="_blank" rel="noopener">Durango &amp; Silverton</a>: the Needleton backpacker fare sells out weeks to months ahead in July and August. This ticket sets every other date.</li>
+          <li>American nonstops, Thursday evening out and the first Monday flight back.</li>
+          <li>Main Ave hotel for Thursday and Sunday, late check-in confirmed.</li>
+          <li>Rental car or airport shuttle.</li>
+          <li>The week before: <a href="https://www.14ers.com/php14ers/peakstatus_peak.php?peakparm=10033" target="_blank" rel="noopener">peak conditions</a>, forecast, and a pickup order for one fuel canister.</li>
+        </ul>
+        <div class="note water">
+          <h4>Permits and rules</h4>
+          <p>No permit is currently required for Weminuche backcountry travel; confirm with the San Juan National Forest, Columbine Ranger District, before you go. Party limit 15. No campfires in Chicago Basin. Camp 100' from water. No dogs on the train.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <h4>Photos</h4>
+    <p>All photographs are from Wikimedia Commons under Creative Commons or public-domain licenses and are loaded from there, so the page needs an internet connection to display them. Files used: Above the Animas (40897274470); Historic Main in Downtown Durango; Strater Hotel - Durango, CO; Animas River just north of downtown Durango, CO; K-37 493 in Durango, Colorado; Steaming beside the Animas River (48721221381); Coming Around the Bend (G. Lamar); Steam on the Animas - September 2013; Coming Around the Bend (15114074572); K-28 473 at Cascade Canyon Wye; Canyon of the Rio las Animas, Colorado (LCCN2017658707); Continental divide trail in Weminuche Wilderness; Windom Peak and Unnamed above Chicago Basin; Alpenglow on the Eolus Peaks; Sunlight Peak; Sunlight Peak from Windom Peak; The ridge from N. Eolus over to Eolus; Durango and Silverton NGRR May 2024-m1; Blue Winter Skies Hug the Durango Skyline. Each file's Commons page carries the photographer's credit and license.</p>
+    <h4>Sources and caveats</h4>
+    <ul>
+      <li>Route descriptions follow 14ers.com (Bill Middlebrook), routes wind1, sunl2, eolu1 and chib1. Read the originals; they have photos of every turn.</li>
+      <li>Train times, fares, and flight schedules were checked in September 2026 and change every season. Verify each before committing money.</li>
+      <li>Mountains change; web pages don't. Conditions reports the week you go beat anything written here.</li>
+    </ul>
+  </div>
+</footer>
+
+<script>
+(function(){
+  /* ---------- images that fail to load hide their figure ---------- */
+  document.querySelectorAll('figure img').forEach(img=>{
+    img.addEventListener('error', ()=>{ img.closest('figure').classList.add('noimg'); });
+  });
+
+  /* ---------- elevation profile ---------- */
+  const stations = [
+    {id:'dfw',      x:0,    ft:430,   name:'Dallas',        opt:true},
+    {id:'dro',      x:110,  ft:6512,  name:'Durango'},
+    {id:'needleton',x:250,  ft:8200,  name:'Needleton',     mh:true},
+    {id:'camp',     x:390,  ft:11000, name:'Chicago Basin'},
+    {id:'twin',     x:470,  ft:12500, name:'Twin Lakes',    opt:true},
+    {id:'windom',   x:540,  ft:14089, name:'Windom'},
+    {id:'sunlight', x:610,  ft:14059, name:'Sunlight',      mh:true},
+    {id:'camp2',    x:690,  ft:11000, name:'Camp',          opt:true},
+    {id:'eolus',    x:760,  ft:14083, name:'Eolus',         eolus:true},
+    {id:'camp3',    x:820,  ft:11000, name:'Camp',          eolus:true, opt:true},
+    {id:'needleton2',x:900, ft:8200,  name:'Needleton',     opt:true},
+    {id:'dro2',     x:1000, ft:6512,  name:'Durango'}
+  ];
+  let W=1000, H=150, top=18, bottom=128; const minFt=0, maxFt=15000;
+  const yOf = ft => bottom - (ft-minFt)/(maxFt-minFt)*(bottom-top);
+  const isMobile = () => window.matchMedia('(max-width:640px)').matches;
+  const svg = document.querySelector('.profile svg');
+  let current=null;
+  const pline=document.getElementById('pline'), pfill=document.getElementById('pfill');
+  const pstns=document.getElementById('pstns'), psegs=document.getElementById('psegs'), pgrid=document.getElementById('pgrid');
+  const pmark=document.getElementById('pmark');
+  const capName=document.getElementById('capName'), capElev=document.getElementById('capElev');
+  const body=document.body;
+
+  function active(){ return stations.filter(s => !s.eolus || body.classList.contains('with-eolus')); }
+
+  function build(){
+    const mob=isMobile();
+    W = mob ? 430 : 1000; H = mob ? 170 : 150; top=18; bottom = mob ? 140 : 128;
+    svg.setAttribute('viewBox', `0 0 ${W} ${H}`);
+    const st=active(); const maxX=st[st.length-1].x;
+    st.forEach(s => s.px = s.x/maxX*W);
+    const pts = st.map(s => `${s.px.toFixed(1)},${yOf(s.ft).toFixed(1)}`);
+    pline.setAttribute('d','M'+pts.join(' L'));
+    pfill.setAttribute('d','M'+pts.join(' L')+` L${W},${bottom} L0,${bottom} Z`);
+    pgrid.innerHTML=[5000,10000,14000].map(ft=>`<line class="p-grid" x1="0" x2="${W}" y1="${yOf(ft)}" y2="${yOf(ft)}"/><text class="p-gl" x="0" y="${yOf(ft)-3}">${ft.toLocaleString()}'</text>`).join('');
+    psegs.innerHTML=st.slice(1).map((s,i)=>{const a=st[i];return `<path class="p-seg" data-seg="${s.id}" d="M${a.px},${yOf(a.ft)} L${s.px},${yOf(s.ft)}"/>`;}).join('');
+    pstns.innerHTML=st.map(s=>{
+      const y=yOf(s.ft), above=s.ft>9000, ty=above?y-11:y+18;
+      const anchor = s.px<40?'start':s.px>W-40?'end':'middle';
+      const hide = s.opt || (mob && s.mh);
+      return `<g class="p-stn" data-stn="${s.id}" tabindex="0" role="button" aria-label="${s.name}, ${s.ft.toLocaleString()} feet"><circle cx="${s.px}" cy="${y}"/><text class="${hide?'opt':''}" x="${s.px}" y="${ty}" text-anchor="${anchor}">${s.name}</text></g>`;
+    }).join('');
+  }
+  build();
+
+  const sectionFor={dfw:'thu',dro:'thu',needleton:'fri',camp:'fri',twin:'sat',windom:'sat',sunlight:'sat',camp2:'sat',eolus:'eolus-day',camp3:'eolus-day',needleton2:'sun',dro2:'sun'};
+  const stationBySection={thu:'dro',fri:'camp',sat:'sunlight','eolus-day':'eolus',sun:'dro2',routes:'windom',gear:'camp',basin:'camp'};
+  function setStation(id){
+    const st=active(); const s=st.find(x=>x.id===id); if(!s) return;
+    pmark.setAttribute('transform',`translate(${s.px},${yOf(s.ft)})`);
+    capName.textContent=s.name; capElev.textContent=s.ft.toLocaleString()+"'";
+    svg.querySelectorAll('.p-stn').forEach(g=>g.classList.toggle('is-on',g.dataset.stn===id));
+    svg.querySelectorAll('.p-seg').forEach(p=>p.classList.remove('is-on'));
+    const sec=sectionFor[id];
+    st.forEach((x,i)=>{ if(i>0 && sectionFor[x.id]===sec){ const seg=svg.querySelector(`.p-seg[data-seg="${x.id}"]`); if(seg) seg.classList.add('is-on'); } });
+    if(st.findIndex(x=>x.id===id)===0){ const seg=svg.querySelector('.p-seg'); if(seg && sectionFor[st[1].id]===sec) seg.classList.add('is-on'); }
+  }
+  setStation('dfw');
+  let lastMob=isMobile();
+  window.addEventListener('resize',()=>{ if(isMobile()!==lastMob){ lastMob=isMobile(); build(); setStation(current?(stationBySection[current.id]||'camp'):'dfw'); } });
+  svg.addEventListener('click',e=>{ const g=e.target.closest('.p-stn'); if(!g) return; const sec=document.getElementById(sectionFor[g.dataset.stn]); if(sec) sec.scrollIntoView({behavior:'smooth',block:'start'}); });
+  svg.addEventListener('keydown',e=>{ if(e.key==='Enter'||e.key===' '){ const g=e.target.closest('.p-stn'); if(g){ e.preventDefault(); g.click(); } } });
+
+  /* ---------- scroll spy ---------- */
+  const navLinks=[...document.querySelectorAll('.nav a[data-spy]')];
+  const navList=document.querySelector('.nav ul');
+  const sections=[...document.querySelectorAll('section.day')];
+  const io=new IntersectionObserver(entries=>{
+    const vis=entries.filter(e=>e.isIntersecting).map(e=>e.target); if(!vis.length) return;
+    const hdr=52+(window.matchMedia('(min-width:800px)').matches ? (document.querySelector('.profile').offsetHeight||0) : 0);
+    vis.sort((a,b)=>Math.abs(a.getBoundingClientRect().top-hdr)-Math.abs(b.getBoundingClientRect().top-hdr));
+    const sec=vis[0]; if(sec===current) return; current=sec;
+    navLinks.forEach(a=>{ const on=a.dataset.spy===sec.id; a.classList.toggle('is-active',on); if(on && !window.matchMedia('(min-width:800px)').matches && navList.scrollWidth>navList.clientWidth){ const li=a.parentElement; navList.scrollTo({left:Math.max(0,li.offsetLeft-16),behavior:'smooth'}); } });
+    setStation(stationBySection[sec.id]||'camp');
+  },{rootMargin:'-35% 0px -45% 0px',threshold:[0,.05,.2,.5]});
+  sections.forEach(s=>io.observe(s));
+  window.addEventListener('scroll',()=>{ if(window.scrollY<200 && current){ current=null; navLinks.forEach(a=>a.classList.remove('is-active')); setStation('dfw'); } },{passive:true});
+
+  /* ---------- Eolus toggle ---------- */
+  const eolus=document.getElementById('eolus');
+  eolus.addEventListener('change',()=>{
+    body.classList.toggle('with-eolus',eolus.checked);
+    build(); setStation(current?(stationBySection[current.id]||'camp'):'dfw');
+    document.querySelectorAll('.eolus-only.day').forEach(s=>{ if(eolus.checked) io.observe(s); else io.unobserve(s); });
+    document.querySelector('.strip div:last-child .t').textContent = eolus.checked ? 'Tue 11:30a' : 'Mon 11:30a';
+  });
+
+  /* ---------- gear checklist ---------- */
+  const boxes=[...document.querySelectorAll('#gearList input[type=checkbox]')];
+  const bar=document.getElementById('gearBar'), count=document.getElementById('gearCount');
+  function tally(){ const n=boxes.filter(b=>b.checked).length; bar.style.width=(n/boxes.length*100)+'%'; count.textContent=`${n} of ${boxes.length} packed`; }
+  boxes.forEach(b=>b.addEventListener('change',tally)); tally();
+  document.getElementById('gearReset').addEventListener('click',()=>{ boxes.forEach(b=>b.checked=false); tally(); });
+})();
+</script>
+</body>
+</html>
