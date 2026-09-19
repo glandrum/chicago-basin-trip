@@ -165,7 +165,7 @@ export function FridaySection() {
         {/* ── Full-route 3D overview ── */}
         <figure className="m-0 mt-10">
           <video
-            src="/route-3d-map.mov"
+            src="/route-3d-map.mp4"
             controls
             playsInline
             preload="metadata"
