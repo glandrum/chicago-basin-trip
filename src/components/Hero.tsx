@@ -1,14 +1,44 @@
 import heroImg from '../assets/hero.jpg';
+import { useLanguage } from '../context/LanguageContext';
+
 const HERO_IMG = heroImg;
 
-function StripItems() {
-  const items = [
-    { t: 'Sep 2, 7p', l: 'Depart DFW, Terminal E' },
+const STRIP = {
+  en: [
+    { t: 'Sep 2, 7p',    l: 'Depart DFW, Terminal E' },
     { t: 'Sep 3, 8:30a', l: 'Train leaves Durango depot' },
-    { t: 'Sep 3, 11a', l: "Off at Needleton, 8,200'" },
-    { t: 'Sep 4, 8a', l: "Windom summit, 14,089'" },
-    { t: 'Sep 6, ~8p', l: 'Night flight DRO → DFW' },
-  ];
+    { t: 'Sep 3, 11a',   l: "Off at Needleton, 8,200'" },
+    { t: 'Sep 4, 8a',    l: "Windom summit, 14,089'" },
+    { t: 'Sep 6, ~8p',   l: 'Night flight DRO → DFW' },
+  ],
+  es: [
+    { t: 'Sep 2, 7p',    l: 'Salida de DFW, Terminal E' },
+    { t: 'Sep 3, 8:30a', l: 'El tren sale de Durango' },
+    { t: 'Sep 3, 11a',   l: "Bajada en Needleton, 8,200'" },
+    { t: 'Sep 4, 8a',    l: "Cumbre del Windom, 14,089'" },
+    { t: 'Sep 6, ~8p',   l: 'Vuelo nocturno DRO → DFW' },
+  ],
+};
+
+const T = {
+  en: {
+    subtitle: 'Dallas to the Weminuche by steam train and foot',
+    h1: 'Chicago Basin by steam train',
+    desc: 'Fly to Durango Thursday after work. Ride an 1882 narrow gauge into a roadless gorge Friday, get dropped at a wilderness flag stop, hike six miles into Chicago Basin, and sleep at 11,000 feet. Climb Windom and Sunlight Saturday. Flag the train home Sunday.',
+    stripLabel: 'Key times',
+  },
+  es: {
+    subtitle: 'De Dallas al Weminuche en tren de vapor y a pie',
+    h1: 'La Cuenca de Chicago en tren de vapor',
+    desc: 'Vuela a Durango el jueves después del trabajo. El viernes, toma un tren de vía estrecha de 1882 hacia un cañón sin carreteras, bájate en una parada de bandera en la naturaleza, camina seis millas hasta la Cuenca de Chicago y duerme a 11,000 pies. Sube el Windom y el Sunlight el sábado. Toma el tren de regreso el domingo.',
+    stripLabel: 'Horario clave',
+  },
+};
+
+function StripItems() {
+  const { lang } = useLanguage();
+  const items = STRIP[lang];
+  const t = T[lang];
   const divider = 'rgba(230,237,232,.20)';
 
   return (
@@ -26,7 +56,7 @@ function StripItems() {
           .key-strip-item.even-col { padding-left:0; }
         }
       `}</style>
-      <div className="key-strip" aria-label="Key times">
+      <div className="key-strip" aria-label={t.stripLabel}>
         {items.map((item, i) => {
           const isOdd = i % 2 === 0;
           const isLast = i === items.length - 1;
@@ -41,10 +71,7 @@ function StripItems() {
                 isLast && oddItems ? 'full-row' : '',
               ].filter(Boolean).join(' ')}
             >
-              <div
-                className="font-cond font-semibold leading-none text-mt-50"
-                style={{ fontSize: 'clamp(18px,4.5vw,30px)' }}
-              >
+              <div className="font-cond font-semibold leading-none text-mt-50" style={{ fontSize: 'clamp(18px,4.5vw,30px)' }}>
                 {item.t}
               </div>
               <div className="text-[13px] mt-1" style={{ color: '#A8B8B4' }}>{item.l}</div>
@@ -57,13 +84,15 @@ function StripItems() {
 }
 
 export function Hero() {
+  const { lang } = useLanguage();
+  const t = T[lang];
+
   return (
     <header
       id="top"
       className="relative bg-mt-950 overflow-hidden"
       style={{ minHeight: 'min(88svh, 880px)', display: 'grid', alignItems: 'end', color: '#E6EDE8', isolation: 'isolate' }}
     >
-      {/* Background image */}
       <img
         src={HERO_IMG}
         alt="Durango & Silverton locomotive No. 473 alongside the Animas River in the San Juan Mountains"
@@ -71,11 +100,7 @@ export function Hero() {
         className="absolute inset-0 w-full h-full object-cover"
         style={{ objectPosition: '50% 40%', zIndex: -2 }}
       />
-
-      {/* Cinematic dark gradient */}
       <div className="hero-overlay absolute inset-0" style={{ zIndex: -1 }} />
-
-      {/* Topo texture */}
       <div
         className="absolute inset-0 pointer-events-none"
         style={{
@@ -88,42 +113,19 @@ export function Hero() {
         }}
       />
 
-
-      <div
-        className="wrap w-full"
-        style={{
-          paddingBottom: 'clamp(22px,5vw,64px)',
-          paddingTop: '110px',
-          position: 'relative',
-          zIndex: 1,
-        }}
-      >
+      <div className="wrap w-full" style={{ paddingBottom: 'clamp(22px,5vw,64px)', paddingTop: '110px', position: 'relative', zIndex: 1 }}>
         <h1
           className="font-cond font-bold"
-          style={{
-            fontSize: 'clamp(40px,10vw,138px)',
-            maxWidth: '11ch',
-            lineHeight: 0.92,
-            letterSpacing: '-0.01em',
-            textShadow: '0 2px 24px rgba(0,0,0,.75), 0 1px 6px rgba(0,0,0,.55)',
-          }}
+          style={{ fontSize: 'clamp(40px,10vw,138px)', maxWidth: '11ch', lineHeight: 0.92, letterSpacing: '-0.01em', textShadow: '0 2px 24px rgba(0,0,0,.75), 0 1px 6px rgba(0,0,0,.55)' }}
         >
-          <span
-            className="font-medium block mb-3"
-            style={{ fontSize: '0.46em', letterSpacing: '0.01em', color: '#D4933A', lineHeight: 1.05 }}
-          >
-            Dallas to the Weminuche by steam train and foot
+          <span className="font-medium block mb-3" style={{ fontSize: '0.46em', letterSpacing: '0.01em', color: '#D4933A', lineHeight: 1.05 }}>
+            {t.subtitle}
           </span>
-          Chicago Basin by steam train
+          {t.h1}
         </h1>
 
-        <p
-          className="max-w-[52ch] mt-4 mb-6 text-mt-100"
-          style={{ fontSize: 'clamp(15px,1.8vw,20px)', textShadow: '0 1px 10px rgba(0,0,0,.65)' }}
-        >
-          Fly to Durango Thursday after work. Ride an 1882 narrow gauge into a roadless gorge
-          Friday, get dropped at a wilderness flag stop, hike six miles into Chicago Basin, and
-          sleep at 11,000 feet. Climb Windom and Sunlight Saturday. Flag the train home Sunday.
+        <p className="max-w-[52ch] mt-4 mb-6 text-mt-100" style={{ fontSize: 'clamp(15px,1.8vw,20px)', textShadow: '0 1px 10px rgba(0,0,0,.65)' }}>
+          {t.desc}
         </p>
 
         <StripItems />

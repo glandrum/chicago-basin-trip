@@ -1,25 +1,22 @@
 import { useEffect, useRef } from 'react';
+import { useLanguage } from '../context/LanguageContext';
 
-interface NavLink {
-  id: string;
-  label: string;
-}
+interface NavLink { id: string; en: string; es: string; }
 
 const NAV_LINKS: NavLink[] = [
-  { id: 'thu',  label: 'Thu · Fly' },
-  { id: 'fri',  label: 'Fri · Train & hike' },
-  { id: 'sat',  label: 'Sat · Summits' },
-  { id: 'sun',  label: 'Out · Train home' },
-  { id: 'gear', label: 'Gear' },
-  { id: 'basin', label: 'Altitude & weather' },
+  { id: 'thu',   en: 'Thu · Fly',          es: 'Jue · Vuelo' },
+  { id: 'fri',   en: 'Fri · Train & hike', es: 'Vie · Tren y caminata' },
+  { id: 'sat',   en: 'Sat · Summits',      es: 'Sáb · Cumbres' },
+  { id: 'sun',   en: 'Out · Train home',   es: 'Sal · Tren de vuelta' },
+  { id: 'gear',  en: 'Gear',               es: 'Equipo' },
+  { id: 'basin', en: 'Altitude & weather', es: 'Altitud y clima' },
 ];
 
-interface NavProps {
-  currentSection: string;
-}
+interface NavProps { currentSection: string; }
 
 export function Nav({ currentSection }: NavProps) {
   const listRef = useRef<HTMLUListElement>(null);
+  const { lang, toggle } = useLanguage();
 
   useEffect(() => {
     const list = listRef.current;
@@ -78,17 +75,31 @@ export function Nav({ currentSection }: NavProps) {
                 ].join(' ')}
                 style={{ minHeight: '44px' }}
               >
-                {link.label}
+                {lang === 'en' ? link.en : link.es}
               </a>
             </li>
           ))}
         </ul>
 
-        {/* Mobile fade */}
+        {/* Language toggle — pinned to right, sits above mobile fade */}
         <div
-          className="absolute right-0 top-0 bottom-0 w-10 pointer-events-none sm:hidden"
-          style={{ background: 'linear-gradient(90deg, rgba(11,21,32,0), rgba(11,21,32,.92))' }}
-        />
+          className="absolute right-0 top-0 h-full flex items-center pr-3 z-10"
+          style={{ background: 'linear-gradient(90deg, transparent, rgba(11,21,32,.92) 28%)' }}
+        >
+          <button
+            onClick={toggle}
+            className="font-cond font-semibold text-[13px] uppercase tracking-widest border px-3 transition-colors duration-150"
+            style={{
+              minHeight: '30px',
+              borderColor: 'rgba(212,147,58,.45)',
+              color: '#D4933A',
+              background: 'rgba(11,21,32,.85)',
+            }}
+            aria-label={lang === 'en' ? 'Switch to Spanish' : 'Switch to English'}
+          >
+            {lang === 'en' ? 'Español' : 'English'}
+          </button>
+        </div>
       </div>
 
       <style>{`.nav ul::-webkit-scrollbar { display: none; }`}</style>
