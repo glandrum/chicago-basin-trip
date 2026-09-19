@@ -4,7 +4,6 @@ import type { Station } from '../data/stations';
 
 interface ElevationProfileProps {
   currentSection: string;
-  withEolus: boolean;
 }
 
 const MIN_FT = 0;
@@ -12,7 +11,7 @@ const MAX_FT = 15000;
 const yOf = (ft: number, bottom: number, top: number) =>
   bottom - ((ft - MIN_FT) / (MAX_FT - MIN_FT)) * (bottom - top);
 
-export function ElevationProfile({ currentSection, withEolus }: ElevationProfileProps) {
+export function ElevationProfile({ currentSection }: ElevationProfileProps) {
   const svgRef = useRef<SVGSVGElement>(null);
   const lineRef = useRef<SVGPathElement>(null);
   const fillRef = useRef<SVGPathElement>(null);
@@ -24,8 +23,8 @@ export function ElevationProfile({ currentSection, withEolus }: ElevationProfile
   const capElevRef = useRef<HTMLSpanElement>(null);
 
   const activeStations = useCallback(
-    (): Station[] => STATIONS.filter((s) => !s.eolus || withEolus),
-    [withEolus],
+    (): Station[] => STATIONS.filter((s) => !s.eolus),
+    [],
   );
 
   const isMobile = () => window.matchMedia('(max-width: 640px)').matches;
@@ -153,7 +152,7 @@ export function ElevationProfile({ currentSection, withEolus }: ElevationProfile
     };
     window.addEventListener('resize', onResize);
     return () => window.removeEventListener('resize', onResize);
-  }, [build, setStation, withEolus]);
+  }, [build, setStation]);
 
   useEffect(() => {
     if (!currentSection) { setStation('dfw'); return; }
