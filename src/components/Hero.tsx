@@ -73,13 +73,7 @@ export function Hero() {
       />
 
       {/* Cinematic dark gradient */}
-      <div
-        className="absolute inset-0"
-        style={{
-          zIndex: -1,
-          background: 'linear-gradient(180deg, rgba(8,14,18,.08) 0%, rgba(8,14,18,.00) 30%, rgba(8,14,18,.38) 62%, rgba(8,14,18,.82) 100%)',
-        }}
-      />
+      <div className="hero-overlay absolute inset-0" style={{ zIndex: -1 }} />
 
       {/* Topo texture */}
       <div
@@ -111,6 +105,7 @@ export function Hero() {
             maxWidth: '11ch',
             lineHeight: 0.92,
             letterSpacing: '-0.01em',
+            textShadow: '0 2px 24px rgba(0,0,0,.75), 0 1px 6px rgba(0,0,0,.55)',
           }}
         >
           <span
@@ -124,7 +119,7 @@ export function Hero() {
 
         <p
           className="max-w-[52ch] mt-4 mb-6 text-mt-100"
-          style={{ fontSize: 'clamp(15px,1.8vw,20px)' }}
+          style={{ fontSize: 'clamp(15px,1.8vw,20px)', textShadow: '0 1px 10px rgba(0,0,0,.65)' }}
         >
           Fly to Durango Thursday after work. Ride an 1882 narrow gauge into a roadless gorge
           Friday, get dropped at a wilderness flag stop, and sleep at 11,000 feet. Climb Windom
