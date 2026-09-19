@@ -31,7 +31,7 @@ const GEAR_GROUPS: GearGroup[] = [
   {
     legend: 'Wear',
     items: [
-      { label: 'Salomon X Ultra Mid GTX', note: 'edge in cracks, avoid polished streaks' },
+      { label: 'Hiking shoes', note: 'edge in cracks, avoid polished streaks' },
       { label: 'Camp shoes or sandals' },
       { label: 'Synthetic base layers, fleece or light puffy' },
       { label: 'Hardshell jacket and pants', note: 'real rain gear, not a windbreaker' },
