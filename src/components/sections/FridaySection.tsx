@@ -166,6 +166,7 @@ export function FridaySection() {
         <figure className="m-0 mt-10">
           <video
             src="/route-3d-map.mp4"
+            poster={chiBasinHero}
             controls
             playsInline
             preload="metadata"
