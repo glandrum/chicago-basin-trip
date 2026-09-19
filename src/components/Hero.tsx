@@ -122,8 +122,8 @@ export function Hero() {
           style={{ fontSize: 'clamp(15px,1.8vw,20px)', textShadow: '0 1px 10px rgba(0,0,0,.65)' }}
         >
           Fly to Durango Thursday after work. Ride an 1882 narrow gauge into a roadless gorge
-          Friday, get dropped at a wilderness flag stop, and sleep at 11,000 feet. Climb Windom
-          and Sunlight Saturday. Flag the train home Sunday.
+          Friday, get dropped at a wilderness flag stop, hike six miles into Chicago Basin, and
+          sleep at 11,000 feet. Climb Windom and Sunlight Saturday. Flag the train home Sunday.
         </p>
 
         <StripItems />
