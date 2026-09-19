@@ -1,6 +1,6 @@
-import { useState, useMemo } from 'react';
-import { EolusContext } from './context/EolusContext';
 import { useScrollSpy } from './hooks/useScrollSpy';
+import { LightboxProvider } from './context/LightboxContext';
+import { Lightbox } from './components/ui/Lightbox';
 import { Hero } from './components/Hero';
 import { Nav } from './components/Nav';
 import { ElevationProfile } from './components/ElevationProfile';
@@ -8,47 +8,34 @@ import { Footer } from './components/Footer';
 import { ThursdaySection } from './components/sections/ThursdaySection';
 import { FridaySection } from './components/sections/FridaySection';
 import { SaturdaySection } from './components/sections/SaturdaySection';
-import { EolusSection } from './components/sections/EolusSection';
 import { SundaySection } from './components/sections/SundaySection';
-import { RoutesSection } from './components/sections/RoutesSection';
 import { GearSection } from './components/sections/GearSection';
 import { BasinSection } from './components/sections/BasinSection';
 
-const BASE_SECTIONS = ['thu', 'fri', 'sat', 'sun', 'routes', 'gear', 'basin'];
+const SECTION_IDS = ['thu', 'fri', 'sat', 'sun', 'gear', 'basin'];
 
 export default function App() {
-  const [withEolus, setWithEolus] = useState(false);
-
-  const sectionIds = useMemo(
-    () =>
-      withEolus
-        ? ['thu', 'fri', 'sat', 'eolus-day', 'sun', 'routes', 'gear', 'basin']
-        : BASE_SECTIONS,
-    [withEolus],
-  );
-
-  const currentSection = useScrollSpy(sectionIds);
+  const currentSection = useScrollSpy(SECTION_IDS);
 
   return (
-    <EolusContext.Provider value={{ withEolus, setWithEolus }}>
-      <div className="topo-bg">
-        <Hero withEolus={withEolus} />
-        <Nav currentSection={currentSection} withEolus={withEolus} />
-        <ElevationProfile currentSection={currentSection} withEolus={withEolus} />
+    <LightboxProvider>
+    <div className="topo-bg">
+      <Hero />
+      <Nav currentSection={currentSection} />
+      <ElevationProfile currentSection={currentSection} />
 
-        <main style={{ position: 'relative', zIndex: 1 }}>
-          <ThursdaySection />
-          <FridaySection />
-          <SaturdaySection />
-          {withEolus && <EolusSection />}
-          <SundaySection />
-          <RoutesSection />
-          <GearSection />
-          <BasinSection />
-        </main>
+      <main style={{ position: 'relative', zIndex: 1 }}>
+        <ThursdaySection />
+        <FridaySection />
+        <SaturdaySection />
+        <SundaySection />
+        <GearSection />
+        <BasinSection />
+      </main>
 
-        <Footer />
-      </div>
-    </EolusContext.Provider>
+      <Footer />
+    </div>
+    <Lightbox />
+    </LightboxProvider>
   );
 }

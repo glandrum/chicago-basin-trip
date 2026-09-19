@@ -13,15 +13,15 @@ export function ThursdaySection() {
         {/* ── Header ── */}
         <div className="grid gap-[18px] items-end mb-[clamp(20px,3vw,40px)]">
           <div>
-            <div className="kicker">Thursday evening</div>
+            <div className="kicker">Thursday, Sep 2</div>
             <h2 className="text-[clamp(28px,5.5vw,52px)] font-cond font-semibold text-mt-50">
               Leave work, land in the mountains
             </h2>
             <p className="text-[clamp(16px,1.8vw,18px)] text-mt-200 mt-3 max-w-[52ch]">
-              The whole trip hangs on one logistics fact: you cannot fly into Durango and catch
-              the train the same morning. The earliest DFW nonstop lands at 9:46 a.m.;
-              the Needleton trains have already left. So the flight goes Thursday evening,
-              and you sleep at 6,500 feet before jumping to 11,000.
+              You cannot fly into Durango and catch the train the same morning — the earliest
+              DFW nonstop lands at 9:46 a.m. and the Needleton trains have already left.
+              A Thursday evening flight gets you in by 9 p.m., a real night of sleep at
+              altitude, and a relaxed walk to the depot Friday morning.
             </p>
           </div>
           <StatBlock stats={[

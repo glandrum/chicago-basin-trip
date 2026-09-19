@@ -2,8 +2,51 @@ import { RouteCard } from '../ui/RouteCard';
 import { Figure } from '../ui/Figure';
 import { StatBlock } from '../ui/StatBlock';
 import { useEolus } from '../../context/EolusContext';
+import sunlightTopo from '../../assets/sunlight/sunlight-topo.jpg';
+import sunlightBoth from '../../assets/sunlight/sunlight-both-routes-one-image.jpg';
+import sunlight1 from '../../assets/sunlight/sunlight-1.jpg';
+import sunlight2 from '../../assets/sunlight/sunlight-2.jpg';
+import sunlight5 from '../../assets/sunlight/sunlight-5.jpg';
+import sunlight7 from '../../assets/sunlight/sunlight-7.jpg';
+import sunlight10 from '../../assets/sunlight/sunlight-10.jpg';
+import sunlight12 from '../../assets/sunlight/sunlight-12.jpg';
+import sunlight15 from '../../assets/sunlight/sunlight-15.jpg';
+import sunlight18 from '../../assets/sunlight/sunlight-18.jpg';
+import sunlight20 from '../../assets/sunlight/sunlight-20.jpg';
+import windomHero from '../../assets/windom/windom-hero.jpg';
+import windom1 from '../../assets/windom/windom-1.jpg';
+import windom2 from '../../assets/windom/windom-2.jpg';
+import windom3 from '../../assets/windom/windom-3.jpg';
+import windom4 from '../../assets/windom/windom-4.jpg';
+import windom5 from '../../assets/windom/windom-5.jpg';
+import windom6 from '../../assets/windom/windom-6.jpg';
+import windom7 from '../../assets/windom/windom-7.jpg';
+import windom8 from '../../assets/windom/windom-8.jpg';
 
 const WC = 'https://commons.wikimedia.org/wiki/Special:FilePath';
+
+const WINDOM_PHOTOS = [
+  { src: windom1, alt: 'Traversing the slab field toward Windom Peak with the annotated route in pink' },
+  { src: windom2, alt: "Near 13,300' ascending south toward Windom's west ridge saddle with Peak 18 labeled and route annotated" },
+  { src: windom3, alt: "A notch in the ridge at 13,800' with the route continuing left along the north side of the crest" },
+  { src: windom4, alt: "Boulder field approaching Windom's summit with the route marked in pink" },
+  { src: windom5, alt: 'Two breaks in the ridge just below the summit providing Class 3 access to the final pitch' },
+  { src: windom6, alt: "View from Windom's summit looking northwest toward Sunlight Peak with Sunlight Spire visible" },
+  { src: windom7, alt: 'Back at the saddle notch with Twin Lakes, Mt. Eolus, North Eolus, and the crossover line toward Sunlight all labeled' },
+  { src: windom8, alt: "At the Windom–Peak 18 saddle with the route dropping north to 13,300' before traversing toward Sunlight, annotated in orange" },
+];
+
+const SUNLIGHT_PHOTOS = [
+  { src: sunlight1, alt: 'Alpine lake at Twin Lakes with Sunlight Peak and Peak 18 labeled and the route shown in orange' },
+  { src: sunlight2, alt: 'Above the lake, the trail switchbacks up the slope toward Sunlight with Peak 18 and the route annotated' },
+  { src: sunlight5, alt: "The climb to Sunlight seen from Windom's west ridge, with Sunlight Peak and Sunlight Spire labeled and route shown" },
+  { src: sunlight7, alt: 'Near the saddle, a notch in the ridge to climb through; the remaining route to the summit is Class 3' },
+  { src: sunlight10, alt: "Passing below a cliff band on Sunlight's approach, the route cairned through the boulders" },
+  { src: sunlight12, alt: 'A hole in the ridge on Sunlight circled to show it is not necessary to pass through, with the easier route annotated' },
+  { src: sunlight15, alt: 'The famous squeeze passage between two boulders on the Sunlight summit ridge' },
+  { src: sunlight18, alt: 'A climber mantling onto the exposed Class 4 summit block of Sunlight Peak with the San Juan skyline far below' },
+  { src: sunlight20, alt: 'A climber sitting on the tiny summit of Sunlight Peak wearing a red helmet' },
+];
 
 export function RoutesSection() {
   const { withEolus } = useEolus();
@@ -23,11 +66,19 @@ export function RoutesSection() {
             </p>
           </div>
           <StatBlock stats={[
-            { value: '12,500\'', label: 'Twin Lakes — where trail ends' },
+            { value: "12,500'", label: 'Twin Lakes — where trail ends' },
             { value: '5:00 a', label: 'Leave camp by this time' },
             { value: 'Class 3–4', label: 'Technical difficulty range' },
           ]} />
         </div>
+
+        <Figure
+          src={sunlightTopo}
+          alt="14ers.com topographic map of the Sunlight Peak south face route showing Twin Lakes, the upper basin, and the route to the summit"
+          caption="Sunlight Peak south face topo (14ers.com). Windom is to the right; the Sunlight route (orange) climbs from Twin Lakes up the gully system. Start dot (green, bottom left) = camp."
+          credit="Map: 14ers.com"
+          aspectRatio="4/3"
+        />
 
         <div className="grid gap-4 md:grid-cols-2 mt-6">
 
@@ -38,11 +89,11 @@ export function RoutesSection() {
             meta="West Ridge · 6 mi / 3,000' from camp · considerable exposure, rockfall, and route-finding above 13,000'"
           >
             <Figure
-              src={`${WC}/Windom_Peak_and_Unnamed_above_Chicago_Basin.jpg?width=1000`}
-              alt="Windom Peak rising above the green floor of Chicago Basin, with the West Ridge skyline visible"
-              caption="Looking up at Windom from Chicago Basin. The West Ridge is the left skyline; the route ascends slabs right of center to the Peak 18 saddle, then follows the ridge crest."
-              credit="Photo: Wikimedia Commons (CC BY)"
-              aspectRatio="16/10"
+              src={windomHero}
+              alt="Windom Peak summit ridge with the annotated west ridge route shown in pink, including the saddle approach and final pitch"
+              caption="The west ridge from the saddle. The route follows the left (north) side of the crest, then threads two breaks near the top for the final Class 3 pitch."
+              credit="Photo: Greg Landrum"
+              aspectRatio="16/9"
             />
             <ol className="pl-5 mt-4 mb-2 space-y-2 text-mt-100 text-[15px]">
               <li>From Twin Lakes stay right around the first lake, switchback up, and continue to a prominent cairn above 13,000' in the center of the upper basin, then a second cairn just east. Sunlight's cairns branch left here.</li>
@@ -52,6 +103,12 @@ export function RoutesSection() {
               <li>Near 13,900' stay left of the ridge. Two breaks in the ridge give Class 3 access to the final pitch. Scramble the summit blocks.</li>
               <li><b>Do not descend the northwest face toward Sunlight</b> in summer — steep and loose. Return to the saddle and use the crossover described below.</li>
             </ol>
+            <div className="reel mt-4">
+              {WINDOM_PHOTOS.map((p) => (
+                <Figure key={p.alt} src={p.src} alt={p.alt} credit="Photo: Greg Landrum" />
+              ))}
+            </div>
+            <p className="text-[12.5px] text-mt-400 mt-1 md:hidden">Swipe for more</p>
           </RouteCard>
 
           {/* ── Sunlight ── */}
@@ -60,29 +117,25 @@ export function RoutesSection() {
             title={<>Sunlight Peak 14,059' <span className="grade grade-c3">Class 3</span><span className="grade grade-c4">Class 4 block</span></>}
             meta="South Face via the Windom crossover · adds ~1 mi / 1,000' · the summit block is the only Class 4 move of the trip"
           >
-            {/* Two-photo grid */}
-            <div className="grid grid-cols-2 gap-2 mt-1">
-              <Figure
-                src={`${WC}/Sunlight_Peak.jpg?width=1000`}
-                alt="Sunlight Peak seen across an alpine lake from the Twin Lakes side"
-                caption="Sunlight from Twin Lakes. The South Face gully is the broad couloir left of center leading to the notch."
-                credit="Photo: Wikimedia Commons (public domain)"
-                aspectRatio="4/3"
-              />
-              <Figure
-                src={`${WC}/Sunlight_Peak_from_Windom_Peak.jpg?width=1000`}
-                alt="Sunlight Peak seen from the summit of Windom, showing the connecting Class 2 crossover slabs"
-                caption="Sunlight from Windom's summit. The crossover drops to the flat terrain at 13,300' (center), then angles up right to the South Face gully."
-                credit="Photo: Wikimedia Commons (CC BY 2.0)"
-                aspectRatio="4/3"
-              />
-            </div>
+            <Figure
+              src={sunlightBoth}
+              alt="Google Earth 3D view showing Sunlight Peak and Windom Peak with the crossover route in blue and the Sunlight and Windom routes in orange and pink"
+              caption="The crossover (blue) between the two peaks. From the Windom saddle, drop north to 13,300', then traverse east to join the Sunlight South Face route."
+              credit="Photo: Greg Landrum"
+              aspectRatio="16/9"
+            />
             <ol className="pl-5 mt-4 mb-2 space-y-2 text-mt-100 text-[15px]">
               <li>From the Windom–Peak 18 saddle drop north about 150' to flatter terrain near 13,300'. Traverse northeast across Class 2 slabs and angle up an easy slope to intersect the standard Sunlight route around 13,500'.</li>
               <li>Follow cairns up the broad gully system to the notch, then a short series of Class 3 moves through boulders — including a well-known squeeze between two blocks — to the summit area.</li>
               <li>The true summit is a leaning block requiring an exposed Class 4 step-across and mantle onto a smooth top with a serious drop on the far side. Decide at camp, not on the block. Many people touch it rather than stand on it; the block immediately below is a legitimate summit.</li>
               <li>Descend the way you came. Windom plus Sunlight via the crossover is about 7 miles and 4,000' from camp.</li>
             </ol>
+            <div className="reel mt-4">
+              {SUNLIGHT_PHOTOS.map((p) => (
+                <Figure key={p.alt} src={p.src} alt={p.alt} credit="Photo: Greg Landrum" />
+              ))}
+            </div>
+            <p className="text-[12.5px] text-mt-400 mt-1 md:hidden">Swipe for more</p>
           </RouteCard>
 
           {/* ── Eolus (conditional) ── */}

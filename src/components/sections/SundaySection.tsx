@@ -2,15 +2,12 @@ import { Note } from '../ui/Note';
 import { Timetable } from '../ui/Timetable';
 import { Figure } from '../ui/Figure';
 import { StatBlock } from '../ui/StatBlock';
-import { useEolus } from '../../context/EolusContext';
 
 const WC = 'https://commons.wikimedia.org/wiki/Special:FilePath';
 
-export function SundaySection(_: Record<string, never>) {
-  const { withEolus, setWithEolus } = useEolus();
-  const handleToggle = () => setWithEolus(!withEolus);
-  const outDay   = withEolus ? 'Monday'  : 'Sunday';
-  const townDay  = withEolus ? 'Tuesday' : 'Monday';
+export function SundaySection() {
+  const outDay  = 'Sunday, Sep 5';
+  const townDay = 'Monday, Sep 6';
 
   return (
     <section className="day-section" id="sun" data-section="sun">
@@ -184,27 +181,6 @@ export function SundaySection(_: Record<string, never>) {
           </div>
         </div>
 
-        {/* ── Eolus toggle ── */}
-        <div className="toggle-wrap">
-          <label
-            htmlFor="eolus-toggle"
-            className="font-cond text-[18px] font-semibold cursor-pointer flex items-center gap-3"
-            style={{ minHeight: '44px' }}
-          >
-            <input
-              id="eolus-toggle"
-              type="checkbox"
-              checked={withEolus}
-              onChange={handleToggle}
-              className="sr-only"
-            />
-            <span className={`switch-track${withEolus ? ' on' : ''}`} aria-hidden="true" />
-            Add a third night and climb Eolus
-          </label>
-          <span className="text-[14px] text-mt-300 md:ml-auto w-full md:w-auto">
-            Adds Sunday as a third summit day, Monday as the walk-out, Tuesday in Durango, Tuesday evening flight home.
-          </span>
-        </div>
       </div>
     </section>
   );

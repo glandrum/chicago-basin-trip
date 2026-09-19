@@ -3,26 +3,22 @@ import { useEffect, useRef } from 'react';
 interface NavLink {
   id: string;
   label: string;
-  eolus?: boolean;
 }
 
 const NAV_LINKS: NavLink[] = [
-  { id: 'thu',       label: 'Thu · Fly' },
-  { id: 'fri',       label: 'Fri · Train & hike' },
-  { id: 'sat',       label: 'Sat · Summits' },
-  { id: 'eolus-day', label: 'Sun · Eolus', eolus: true },
-  { id: 'sun',       label: 'Out · Train home' },
-  { id: 'routes',    label: 'Routes' },
-  { id: 'gear',      label: 'Gear' },
-  { id: 'basin',     label: 'Altitude & weather' },
+  { id: 'thu',  label: 'Thu · Fly' },
+  { id: 'fri',  label: 'Fri · Train & hike' },
+  { id: 'sat',  label: 'Sat · Summits' },
+  { id: 'sun',  label: 'Out · Train home' },
+  { id: 'gear', label: 'Gear' },
+  { id: 'basin', label: 'Altitude & weather' },
 ];
 
 interface NavProps {
   currentSection: string;
-  withEolus: boolean;
 }
 
-export function Nav({ currentSection, withEolus }: NavProps) {
+export function Nav({ currentSection }: NavProps) {
   const listRef = useRef<HTMLUListElement>(null);
 
   useEffect(() => {
@@ -69,7 +65,7 @@ export function Nav({ currentSection, withEolus }: NavProps) {
             </a>
           </li>
 
-          {NAV_LINKS.filter((l) => !l.eolus || withEolus).map((link) => (
+          {NAV_LINKS.map((link) => (
             <li key={link.id} className="flex-shrink-0" style={{ scrollSnapAlign: 'start' }}>
               <a
                 href={`#${link.id}`}

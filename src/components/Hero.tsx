@@ -1,16 +1,13 @@
-interface HeroProps {
-  withEolus: boolean;
-}
+import heroImg from '../assets/hero.jpg';
+const HERO_IMG = heroImg;
 
-const HERO_IMG = 'https://commons.wikimedia.org/wiki/Special:FilePath/Above_the_Animas_(40897274470).jpg';
-
-function StripItems({ withEolus }: { withEolus: boolean }) {
+function StripItems() {
   const items = [
-    { t: 'Thu 7:00p', l: 'Depart DFW, Terminal E' },
-    { t: 'Fri 8:30a', l: 'Train leaves Durango depot' },
-    { t: 'Fri 11:00a', l: "Off at Needleton, 8,200'" },
-    { t: 'Sat 8:00a', l: "Windom summit, 14,089'" },
-    { t: withEolus ? 'Tue ~8:00p' : 'Mon ~8:00p', l: 'Night flight DRO → DFW' },
+    { t: 'Sep 2, 7p', l: 'Depart DFW, Terminal E' },
+    { t: 'Sep 3, 8:30a', l: 'Train leaves Durango depot' },
+    { t: 'Sep 3, 11a', l: "Off at Needleton, 8,200'" },
+    { t: 'Sep 4, 8a', l: "Windom summit, 14,089'" },
+    { t: 'Sep 6, ~8p', l: 'Night flight DRO → DFW' },
   ];
   const divider = 'rgba(230,237,232,.20)';
 
@@ -59,7 +56,7 @@ function StripItems({ withEolus }: { withEolus: boolean }) {
   );
 }
 
-export function Hero({ withEolus }: HeroProps) {
+export function Hero() {
   return (
     <header
       id="top"
@@ -68,13 +65,11 @@ export function Hero({ withEolus }: HeroProps) {
     >
       {/* Background image */}
       <img
-        src={`${HERO_IMG}?width=1600`}
-        srcSet={`${HERO_IMG}?width=900 900w, ${HERO_IMG}?width=1600 1600w, ${HERO_IMG}?width=2400 2400w`}
-        sizes="100vw"
-        alt="A Durango & Silverton steam train on the High Line ledge above the Animas River gorge"
+        src={HERO_IMG}
+        alt="Durango & Silverton locomotive No. 473 alongside the Animas River in the San Juan Mountains"
         fetchPriority="high"
         className="absolute inset-0 w-full h-full object-cover"
-        style={{ objectPosition: '62% 55%', zIndex: -2 }}
+        style={{ objectPosition: '50% 40%', zIndex: -2 }}
       />
 
       {/* Cinematic dark gradient */}
@@ -82,7 +77,7 @@ export function Hero({ withEolus }: HeroProps) {
         className="absolute inset-0"
         style={{
           zIndex: -1,
-          background: 'linear-gradient(180deg, rgba(8,14,18,.32) 0%, rgba(8,14,18,.05) 28%, rgba(8,14,18,.72) 65%, rgba(8,14,18,.97) 100%)',
+          background: 'linear-gradient(180deg, rgba(8,14,18,.08) 0%, rgba(8,14,18,.00) 30%, rgba(8,14,18,.38) 62%, rgba(8,14,18,.82) 100%)',
         }}
       />
 
@@ -99,12 +94,6 @@ export function Hero({ withEolus }: HeroProps) {
         }}
       />
 
-      <span
-        className="absolute right-3 top-3 text-[11px] z-10"
-        style={{ color: 'rgba(230,237,232,.50)' }}
-      >
-        Photo: Wikimedia Commons (CC BY)
-      </span>
 
       <div
         className="wrap w-full"
@@ -142,7 +131,7 @@ export function Hero({ withEolus }: HeroProps) {
           and Sunlight Saturday. Flag the train home Sunday.
         </p>
 
-        <StripItems withEolus={withEolus} />
+        <StripItems />
       </div>
     </header>
   );

@@ -1,5 +1,7 @@
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 import type { ReactNode } from 'react';
+import { usePhotoGroup } from '../../context/PhotoGroupContext';
+import { useLightbox } from '../../context/LightboxContext';
 
 interface FigureProps {
   src: string;
@@ -8,7 +10,7 @@ interface FigureProps {
   alt: string;
   caption?: ReactNode;
   credit?: string;
-  aspectRatio?: '4/3' | '16/10' | '21/9';
+  aspectRatio?: string;
   loading?: 'lazy' | 'eager';
 }
 
@@ -23,15 +25,22 @@ export function Figure({
   loading = 'lazy',
 }: FigureProps) {
   const [hidden, setHidden] = useState(false);
+  const group = usePhotoGroup();
+  const { open } = useLightbox();
+
+  const handleClick = useCallback(() => {
+    if (group) {
+      const idx = group.images.indexOf(src);
+      if (idx >= 0) { group.openAt(idx); return; }
+    }
+    open([src], 0);
+  }, [src, group, open]);
 
   if (hidden) return null;
 
   return (
-    <figure className="m-0 group">
-      <div
-        className="overflow-hidden"
-        style={{ aspectRatio }}
-      >
+    <figure className="m-0 group" onClick={handleClick} style={{ cursor: 'zoom-in' }}>
+      <div className="overflow-hidden" style={{ aspectRatio }}>
         <img
           src={src}
           srcSet={srcSet}
