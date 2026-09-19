@@ -120,6 +120,22 @@ export function FridaySection() {
           </p>
         </div>
 
+        {/* ── Full-route 3D overview ── */}
+        <figure className="m-0 mb-8">
+          <video
+            src="/route-3d-map.mov"
+            controls
+            playsInline
+            preload="metadata"
+            className="w-full border border-mt-600 block"
+            style={{ background: '#0B1520', aspectRatio: '16/9', objectFit: 'contain' }}
+          />
+          <figcaption className="text-[13px] text-mt-300 mt-2 leading-[1.4]">
+            3D route flyover: Needleton flag stop (8,200') → Needle Creek Trail → Chicago Basin
+            → Windom saddle → Sunlight Peak summit (14,059'). Two days, ~12 miles, 5,800' total gain.
+          </figcaption>
+        </figure>
+
         <PhotoGroup images={WALK_GROUP}>
           <Figure
             src={chiBasinHero}
